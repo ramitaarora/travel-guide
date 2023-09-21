@@ -11,15 +11,20 @@
     
 </head>
     
-    <header class="container text-center bg-gray-800 text-white min-w-full p-6">
-      <h1 class="text-3xl font-bold ">Travel Guide</h1>
+    <header>
       <!--nav bar-->
-      <nav>  
+      <nav class="container text-center bg-gray-800 text-white min-w-full p-6">  
+        <h1 class="text-3xl font-bold ">Travel Guide</h1>
         <form id="search-bar">
           <input type="text" class="p-1 m-5 text-black" name="searchTerm" placeholder="Search by City"/>
           <input type="submit" class="bg-gray-300 text-black rounded-full px-2 py-1 hover:cursor-pointer" id="search-submit" value="Search"/>
         </form>
       </nav>
+
+      <section id="city-header" class="hidden">
+        <h2>City Name Here</h2>
+        <p>Photo here</p>
+      </section>
     </header>
 
 <body>
