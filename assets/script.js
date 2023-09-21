@@ -10,14 +10,19 @@ searchBar.addEventListener('submit', function(event) {
     event.preventDefault();
     //console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
     var searchCity = event.target.searchTerm.value;
-    getCityURL(searchCity);
+
+    if (searchCity) {
+        cityHeader.setAttribute("class", "hidden");
+        getCityURL(searchCity);
+    }
 })
 
 // City Header
 
-function getCityURL(searchCity) {
-    // add %20 for spaces in search term
+var cityHeader = document.querySelector('#city-header');
+var cityName = document.querySelector('#city-name');
 
+function getCityURL(searchCity) {
     var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
     var cityURL = [];
 
@@ -75,12 +80,8 @@ function getImage(imageURL, searchCity) {
     });
 }
 
-
-
 function setHeaderInfo(headerImageURL, searchCity) {
-    var cityHeader = document.querySelector('#city-header');
-    var cityName = document.querySelector('#city-name');
-
+    cityHeader.removeAttribute("class", "hidden")
     cityHeader.setAttribute("style", `background-image:url("${headerImageURL}")`)
     cityName.innerHTML = searchCity;
 }
