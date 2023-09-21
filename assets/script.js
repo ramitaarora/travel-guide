@@ -10,18 +10,15 @@ searchBar.addEventListener('submit', function(event) {
     event.preventDefault();
     //console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
     var searchCity = event.target.searchTerm.value;
-    getCityURL(searchCity)
+    getCityURL(searchCity);
 })
 
 // City Header
 
-var cityHeader = document.querySelector('.city-header');
-
-
 function getCityURL(searchCity) {
     // add %20 for spaces in search term
 
-    var url = 'https://api.teleport.org/api/cities/?search=san%20francisco' // change this later to adapt to search query
+    var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
     var cityURL = [];
 
     fetch(url).then(function(response) {
@@ -35,12 +32,12 @@ function getCityURL(searchCity) {
         }
 
         cityURL = cityURL[0];
-        console.log(cityURL)
-        getCity(cityURL);
+        //console.log(cityURL)
+        getCity(cityURL, searchCity);
     })
 }
 
-function getCity(cityurl) {
+function getCity(cityurl, searchCity) {
     var cityIdURL;
     fetch(cityurl).then(function(response) {
         return response.json();
@@ -48,28 +45,42 @@ function getCity(cityurl) {
         cityIdURL = data._links["city:urban_area"].href;
         // cityImage = data.photos[0].image.web;
 
-        console.log(cityIdURL);
-        getCityImageURL(cityIdURL)
+        //console.log(cityIdURL);
+        getCityImageURL(cityIdURL, searchCity)
     })
     
 }
 
-function getCityImageURL(cityIdURL) {
+function getCityImageURL(cityIdURL, searchCity) {
     var imageURL;
     fetch(cityIdURL).then(function(response) {
         return response.json();
     }).then(function (data) {
         imageURL = data._links["ua:images"].href;
 
-        console.log(imageURL);
-        getImage(imageURL);
+        //console.log(imageURL);
+        getImage(imageURL, searchCity);
     })
 }
 
-function getImage(imageURL) {
+function getImage(imageURL, searchCity) {
+    var headerImage;
     fetch(imageURL).then(function(response) {
         return response.json();
     }).then(function(data) {
-        console.log(data.photos[0].image.web);
+        headerImageURL = data.photos[0].image.web;
+
+        //console.log(headerImageURL)
+        setHeaderInfo(headerImageURL, searchCity);
     });
+}
+
+
+
+function setHeaderInfo(headerImageURL, searchCity) {
+    var cityHeader = document.querySelector('#city-header');
+    var cityName = document.querySelector('#city-name');
+
+    cityHeader.setAttribute("style", `background-image:url("${headerImageURL}")`)
+    cityName.innerHTML = searchCity;
 }

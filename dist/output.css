@@ -587,6 +587,10 @@ video {
   min-width: 100%;
 }
 
+.items-end{
+  align-items: flex-end;
+}
+
 .items-center{
   align-items: center;
 }
@@ -664,7 +668,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+#city-header {
+  min-height: 272px;
+  background-position: center;
+}
+
 .hover\:cursor-pointer:hover{
   cursor: pointer;
 }
-

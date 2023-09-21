@@ -4,3 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+#city-header {
+    min-height: 272px;
+    background-position: center;
+}
