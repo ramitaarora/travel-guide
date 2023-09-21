@@ -4,3 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
+img {
+    height: 300px;
+}
