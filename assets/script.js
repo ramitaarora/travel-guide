@@ -14,19 +14,20 @@ searchBar.addEventListener('submit', function(event) {
 
 // input city data fetch to display info  
   
-var cityInput = ["q60"]
+var cityInput = ['Q60']
 var countryInput = []
 var dispName = document.querySelector(".display-input-name")
-var dispRegion = document.querySelector("display-input-region")
-var dispLanguage = document.querySelector("display-input-language")
-var dispCurrency = document.querySelector("display-input-currency")
-var dispTime = document.querySelector("display-input-time")
-var dispAbout = document.querySelector("display-input-about")
+var dispCountry = document.querySelector(".display-input-country")
+var dispPopulation = document.querySelector(".display-input-population")
+var dispLanguage = document.querySelector(".display-input-language")
+var dispCurrency = document.querySelector(".display-input-currency")
+var dispTime = document.querySelector(".display-input-time")
+var dispAbout = document.querySelector(".display-input-about")
 
 // fetch request to get city name, region and population
-var urlCityEl1 = 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/' + cityInput;
 
-fetch(urlCityEl1 {
+
+fetch('https://wft-geo-db.p.rapidapi.com/v1/geo/cities/' + cityInput, {
   method: 'GET',
   headers: {
     'X-RapidAPI-Key': '964ebf4356msh7a0bb58633e129ep1376dfjsn57fb259d2f72',
@@ -39,19 +40,21 @@ fetch(urlCityEl1 {
   })
   .then(function (data) {
     console.log(data);
-    displayName
+    displayName(data)
   });
 
 
-  
+  // display function to show population, 
   var displayName = function(data){
   
-  if (data.length === 0) {
+  if (data.data === 0) {
     return;
 
   }
   else {
-    dispName.textContent = data.name
+    dispName.textContent = data.data.name
+    dispCountry.textContent = data.data.country
+    dispPopulation.textContent = ('POPULATION: '+ data.data.population)
   }
 
 }
