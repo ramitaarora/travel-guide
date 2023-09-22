@@ -205,7 +205,7 @@ function getHotels(cityID) {
             return response.json();
         })
         .then(function (data) {
-            document.querySelector("#hotels").innerHTML = "";
+            // document.querySelector("#hotels").innerHTML = "";
             var displayLength = 3
 
             for (i = 0; i < displayLength; i++) {
@@ -269,12 +269,16 @@ function getRestaurants(searchTerm) {
                 var rating = data.businesses[i].rating;
                 var phone = data.businesses[i].display_phone;
                 var photos = data.businesses[i].image_url;
-
+                var icon = document.createElement("i");
+                
+                icon.setAttribute("class", "fa-solid fa-star fa-sm");
+                icon.style = "color:#f0e800";
                 yelpName.textContent = "Restaurant Name: ";
-                yelpRating.textContent = "Rating: ";
                 yelpPhone.textContent = "Phone Number: ";
+                yelpRating.textContent = "Yelp Rating: ";
                 yelpPhoto.setAttribute('src', photos);
                 yelpName.append(name);
+                yelpRating.append(icon);
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
                 document.querySelector("#hotels").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
