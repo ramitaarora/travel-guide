@@ -205,7 +205,7 @@ function getHotels(cityID) {
             return response.json();
         })
         .then(function (data) {
-            // document.querySelector("#hotels").innerHTML = "";
+            document.querySelector("#hotels").innerHTML = "";
             var displayLength = 3
 
             for (i = 0; i < displayLength; i++) {
@@ -244,7 +244,7 @@ function getCityID(searchTerm) {
 // Restaurants (Yelp)
 
 function getRestaurants(searchTerm) {
-    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&term=restaurants&sort_by=rating&limit=5', {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&term=restaurants&sort_by=review_count&limit=5', {
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -268,7 +268,7 @@ function getRestaurants(searchTerm) {
                 var phone = data.businesses[i].display_phone;
                 var photos = data.businesses[i].image_url;
                 var icon = document.createElement("i");
-
+                
                 icon.setAttribute("class", "fa-solid fa-star fa-sm");
                 icon.style = "color:#f0e800";
                 yelpName.textContent = "Restaurant Name: ";
@@ -279,7 +279,14 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(icon);
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
-                document.querySelector("#hotels").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+                document.querySelector("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+            };
+
+            var prefix = "yelpName";
+            var modalName;
+            for (j = 0; j < 3; j++) {
+                modalName = document.getElementById(prefix + j);
+                console.log(modalName);
             };
         });
 };
