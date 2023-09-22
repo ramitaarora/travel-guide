@@ -258,6 +258,10 @@ function getRestaurants(searchTerm) {
             return response.json();
         })
         .then(function (data) {
+            console.log(data);
+            console.log(data.businesses[0].id);
+            getYelpReviews(data.businesses[0].id);
+
             document.querySelector("#yelp").innerHTML = "";
             var displayLength = 5
 
@@ -293,6 +297,22 @@ function getRestaurants(searchTerm) {
                 console.log(modalName);
             };
         });
+};
+
+function getYelpReviews(restaurantID) {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer 8GkrzCSBb-7hLtDuXuJFVo0NAkoGFSiYYiTLv-lf5MjJOIq0e0KuCx1_MZeT7FXWNZwGof-Y1mjZEjBm79e9v9M4ErO3jeS6sw-9UK6ZYWVbFYNMVdHuK06aY8QNZXYx'
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        })
 };
 
 // Map
