@@ -294,8 +294,17 @@ function getRestaurants(searchTerm) {
                 modalName = document.getElementById(prefix + j);
                 modalName.textContent = data.businesses[j].name;
             };
+
+            var prefix = "button";
+            var buttonName;
+            for (l = 0; l < 5; l++) {
+                buttonName = document.getElementById(prefix + l);
+                buttonName.textContent = "Click for " + data.businesses[l].name + " Reviews!";
+            };
         });
 };
+
+// Displays reviews in modals
 
 function getYelpReviews(restaurantID) {
     fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
