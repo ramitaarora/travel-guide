@@ -9,18 +9,21 @@ var dispTime = document.querySelector(".display-input-time")
 var dispAbout = document.querySelector(".display-input-about")
 var cityCardHeader = document.querySelector('#city-card')
 
-
 // Navigation/Search Bar
+
 var searchBar = document.querySelector('#search-bar');
 var searchButton = document.querySelector('#search-submit');
 
 searchBar.addEventListener('submit', function (event) {
     event.preventDefault();
-   
+    //console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
     var searchCity = event.target.searchTerm.value;
 
+    // Searching for hotels with searchTerm.value below
+    document.querySelector("#hotels").innerHTML = "";
+    getCityID(event.target.searchTerm.value);
 
-        getCityUrlShawn(searchCity);
+    getCityUrlShawn(searchCity);
     
     // Searching for hotels with searchTerm.value below
     document.querySelector("#hotels").innerHTML = "";
@@ -29,7 +32,7 @@ searchBar.addEventListener('submit', function (event) {
     // Searching for restaurants via yelp
     getRestaurants(event.target.searchTerm.value);
 
-    //SETTING HEADER
+    // Setting header
     if (searchCity) {
         cityHeader.setAttribute("class", "hidden");
         getCityURL(searchCity);
@@ -87,9 +90,10 @@ function getCityURL(searchCity) {
             const element = cities[index];
             cityURL.push(element._links["city:item"].href);
         }
+
         cityURL = cityURL[0];
-        getCity(cityURL, searchCity);
-       
+        //console.log(cityURL)
+        getCity(cityURL);
     })
 }
 
@@ -140,24 +144,26 @@ function getCity(cityurl, searchCity) {
     var cityIdURL;
     var latitude;
     var longitude;
+    var cityNameAPI;
 
     fetch(cityurl).then(function(response) {
         return response.json();
     }).then(function (data) {
         cityIdURL = data._links["city:urban_area"].href;
-        
+        cityNameAPI = data.full_name;
         latitude = data.location.latlon.latitude
         longitude = data.location.latlon.longitude;
 
         //console.log(cityIdURL);
         //console.log(latLong)
-        getCityImageURL(cityIdURL, searchCity)
+        //console.log(cityNameAPI)
+        getCityImageURL(cityIdURL, cityNameAPI)
         getMap(latitude, longitude, searchCity)
     })
     
 }
 
-function getCityImageURL(cityIdURL, searchCity) {
+function getCityImageURL(cityIdURL, cityNameAPI) {
     var imageURL;
     fetch(cityIdURL).then(function(response) {
         return response.json();
@@ -165,11 +171,11 @@ function getCityImageURL(cityIdURL, searchCity) {
         imageURL = data._links["ua:images"].href;
 
         //console.log(imageURL);
-        getImage(imageURL, searchCity);
+        getImage(imageURL, cityNameAPI);
     })
 }
 
-function getImage(imageURL, searchCity) {
+function getImage(imageURL, cityNameAPI) {
     var headerImage;
     fetch(imageURL).then(function(response) {
         return response.json();
@@ -177,14 +183,14 @@ function getImage(imageURL, searchCity) {
         headerImageURL = data.photos[0].image.web;
 
         //console.log(headerImageURL)
-        setHeaderInfo(headerImageURL, searchCity);
+        setHeaderInfo(headerImageURL, cityNameAPI);
     });
 }
 
-function setHeaderInfo(headerImageURL, searchCity) {
+function setHeaderInfo(headerImageURL, cityNameAPI) {
     cityHeader.removeAttribute("class", "hidden")
     cityHeader.setAttribute("style", `background-image:url("${headerImageURL}")`)
-    cityName.innerHTML = searchCity;
+    cityName.innerHTML = cityNameAPI;
 }
 
 // Hotels
