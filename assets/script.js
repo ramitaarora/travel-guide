@@ -311,16 +311,16 @@ function getYelpReviews(restaurantID) {
 
             var prefix = "yelpReview";
             var modalReviews;
-            for (i = 0; i < 5; i++) {
-                modalReviews = document.getElementById(prefix + i);
+            for (k = 0; k < 5; k++) {
+                modalReviews = document.getElementById(prefix + k);
                 
                 var reviewText = document.createElement("p");
                 var signedName = document.createElement("p");
-                var review = data.reviews[i].text;
-                var date = data.reviews[i].time_created;
-                var name = data.reviews[i].user.name;
+                var review = data.reviews[k].text;
+                var date = data.reviews[k].time_created;
+                var name = data.reviews[k].user.name;
 
-                reviewText.append(review);
+                reviewText.textContent = review;
                 signedName.append(name, date);
                 modalReviews.append(reviewText, signedName);
             };
