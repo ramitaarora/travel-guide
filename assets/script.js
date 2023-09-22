@@ -273,6 +273,7 @@ function getRestaurants(searchTerm) {
                 var photos = data.businesses[i].image_url;
                 var icon = document.createElement("i");
                 
+
                 icon.setAttribute("class", "fa-solid fa-star fa-sm");
                 icon.style = "color:#f0e800";
                 yelpName.textContent = "Restaurant Name: ";
@@ -283,7 +284,9 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(icon);
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
-                document.querySelector("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+                // document.querySelector("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+                $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal0">Click for Reviews</button>')
 
                 getYelpReviews(data.businesses[i].id);
             };
@@ -295,19 +298,19 @@ function getRestaurants(searchTerm) {
                 modalName.textContent = data.businesses[j].name;
             };
 
-            var prefix = "button";
-            var buttonName;
-            for (l = 0; l < 5; l++) {
-                buttonName = document.getElementById(prefix + l);
-                buttonName.textContent = "Click for " + data.businesses[l].name + " Reviews!";
-            };
+            // var prefix = "button";
+            // var buttonName;
+            // for (l = 0; l < 5; l++) {
+            //     buttonName = document.getElementById(prefix + l);
+            //     buttonName.textContent = "Click for " + data.businesses[l].name + " Reviews!";
+            // };
         });
 };
 
 // Displays reviews in modals
 
 function getYelpReviews(restaurantID) {
-    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=6&sort_by=yelp_sort', {
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -321,18 +324,21 @@ function getYelpReviews(restaurantID) {
             console.log(data);
             var prefix = "yelpReview";
             var modalReviews;
-            for (k = 0; k < 5; k++) {
+            var length = 5
+            for (k = 0; k < length; k++) {
                 modalReviews = document.getElementById(prefix + k);
                 
-                var reviewText = document.createElement("p");
+                var signedReview = document.createElement("p");
                 var signedName = document.createElement("p");
+                var signedDate = document.createElement("p");
                 var review = data.reviews[k].text;
                 var date = data.reviews[k].time_created;
                 var name = data.reviews[k].user.name;
 
-                reviewText.textContent = review;
-                signedName.append(name, date);
-                modalReviews.append(reviewText, signedName);
+                signedReview.textContent = review;
+                signedName.append(name);
+                signedDate.append(date);
+                modalReviews.append(signedReview, signedName, signedDate);
             };
         })
 };
