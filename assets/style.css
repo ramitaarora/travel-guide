@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+img {
+    height: 300px;
+}
 .hidden {
     display: none !important;
 }
