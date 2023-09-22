@@ -32,6 +32,9 @@ searchBar.addEventListener('submit', function (event) {
 document.querySelector("#hotels").innerHTML = "";
 getCityID(event.target.searchTerm.value);
 
+// Searching for restaurants via yelp
+getRestaurants(event.target.searchTerm.value);
+
 if (searchCity) {
     cityHeader.setAttribute("class", "hidden");
     getCityURL(searchCity);
@@ -202,7 +205,7 @@ function getHotels(cityID) {
             return response.json();
         })
         .then(function (data) {
-            document.querySelector("#hotels").innerHTML = "";
+            // document.querySelector("#hotels").innerHTML = "";
             var displayLength = 3
 
             for (i = 0; i < displayLength; i++) {
@@ -235,6 +238,49 @@ function getCityID(searchTerm) {
         })
         .then(function (data) {
             getHotels(data.data[0].gaiaId);
+        });
+};
+
+// Restaurants (Yelp)
+
+function getRestaurants(searchTerm) {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&term=restaurants&sort_by=rating&limit=5', {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer 8GkrzCSBb-7hLtDuXuJFVo0NAkoGFSiYYiTLv-lf5MjJOIq0e0KuCx1_MZeT7FXWNZwGof-Y1mjZEjBm79e9v9M4ErO3jeS6sw-9UK6ZYWVbFYNMVdHuK06aY8QNZXYx'
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            document.querySelector("#yelp").innerHTML = "";
+            var displayLength = 5
+
+            for (i = 0; i < displayLength; i++) {
+                var yelpName = document.createElement("p");
+                var yelpRating = document.createElement("p");
+                var yelpPhone = document.createElement("p");
+                var yelpPhoto = document.createElement("img")
+                var name = data.businesses[i].name;
+                var rating = data.businesses[i].rating;
+                var phone = data.businesses[i].display_phone;
+                var photos = data.businesses[i].image_url;
+                var icon = document.createElement("i");
+
+                icon.setAttribute("class", "fa-solid fa-star fa-sm");
+                icon.style = "color:#f0e800";
+                yelpName.textContent = "Restaurant Name: ";
+                yelpPhone.textContent = "Phone Number: ";
+                yelpRating.textContent = "Yelp Rating: ";
+                yelpPhoto.setAttribute('src', photos);
+                yelpName.append(name);
+                yelpRating.append(icon);
+                yelpRating.append(rating);
+                yelpPhone.append(phone);
+                document.querySelector("#hotels").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+            };
         });
 };
 
