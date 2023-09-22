@@ -255,8 +255,6 @@ function getRestaurants(searchTerm) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-
             document.querySelector("#yelp").innerHTML = "";
             var displayLength = 5
 
