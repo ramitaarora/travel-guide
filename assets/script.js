@@ -9,7 +9,7 @@ var dispPopulation = document.querySelector(".display-input-population")
 var dispLanguage = document.querySelector(".display-input-language")
 var dispCurrency = document.querySelector(".display-input-currency")
 var dispTime = document.querySelector(".display-input-time")
-var dispAbout = document.querySelector(".display-input-about")
+
 var cityCardHeader = document.querySelector('#city-card')
 
 
@@ -24,6 +24,49 @@ searchBar.addEventListener('submit', function (event) {
 
 
         getCityUrlShawn(searchCity);
+        
+
+
+        //about article js
+
+       
+     
+
+
+
+        fetch("https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search="+ searchCity ).then(function(resp) {
+            console.log(resp);
+            return resp.json()
+        }).then(function(data) {
+            console.log(data);
+            var wikiId = data[3][0]
+            console.log(wikiId)
+            
+
+         
+            
+            
+            var iFrame = document.createElement("iframe");
+            iFrame.setAttribute("src",articleUrl);
+            iFrame.setAttribute("width","100%");
+            
+            var divEl = document.querySelector("#article");
+            divEl.append(iFrame)
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 //console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
 
@@ -237,3 +280,5 @@ function getCityID(searchTerm) {
             getHotels(data.data[0].gaiaId);
         });
 };
+
+//getting about article
