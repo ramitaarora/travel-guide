@@ -60,3 +60,16 @@ h1.temp {
     margin-left: 8px;
 }
 
+img {
+    height: 300px;
+}
+.hidden {
+    display: none !important;
+}
+
+#city-header {
+    height: 272px;
+    background-position: center;
+    display:flex;
+    align-items: end;
+}
