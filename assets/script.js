@@ -284,7 +284,6 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(icon);
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
-                // document.querySelector("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
                 $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
                 $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal0">Click for Reviews</button>')
 
@@ -293,17 +292,12 @@ function getRestaurants(searchTerm) {
 
             var prefix = "yelpName";
             var modalName;
+// Need to fix restaurant name in review modal
             for (j = 0; j < 5; j++) {
                 modalName = document.getElementById(prefix + j);
                 modalName.textContent = data.businesses[j].name;
+                console.log(data.businesses[j].name);
             };
-
-            // var prefix = "button";
-            // var buttonName;
-            // for (l = 0; l < 5; l++) {
-            //     buttonName = document.getElementById(prefix + l);
-            //     buttonName.textContent = "Click for " + data.businesses[l].name + " Reviews!";
-            // };
         });
 };
 
