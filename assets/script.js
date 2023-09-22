@@ -199,7 +199,7 @@ function getHotels(cityID) {
     fetch('https://hotels-com-provider.p.rapidapi.com/v2/hotels/search?sort_order=RECOMMENDED&locale=en_US&checkin_date=2023-09-26&adults_number=1&domain=US&region_id=' + cityID + '&checkout_date=2023-09-27', {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004',
+            'X-RapidAPI-Key': '964ebf4356msh7a0bb58633e129ep1376dfjsn57fb259d2f72',
             'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
     })
@@ -232,7 +232,7 @@ function getCityID(searchTerm) {
     fetch(requestURL, {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004',
+            'X-RapidAPI-Key': '964ebf4356msh7a0bb58633e129ep1376dfjsn57fb259d2f72',
             'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
     })
@@ -285,7 +285,7 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
                 $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
-                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal0">Click for Reviews</button>')
+                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal'+ [i] +'">Click for Reviews</button>')
 
                 getYelpReviews(data.businesses[i].id);
             };
