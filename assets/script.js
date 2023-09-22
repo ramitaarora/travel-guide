@@ -237,3 +237,5 @@ function getCityID(searchTerm) {
             getHotels(data.data[0].gaiaId);
         });
 };
+
+// Map
