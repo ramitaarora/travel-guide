@@ -284,8 +284,9 @@ function getRestaurants(searchTerm) {
 
             var prefix = "yelpName";
             var modalName;
-            for (j = 0; j < 3; j++) {
+            for (j = 0; j < 5; j++) {
                 modalName = document.getElementById(prefix + j);
+                modalName.textContent = data.businesses[j].name;
                 console.log(modalName);
             };
         });
