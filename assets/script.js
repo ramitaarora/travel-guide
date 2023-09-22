@@ -11,38 +11,7 @@ searchBar.addEventListener('submit', function(event) {
     console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
 })
 
-function saveRecentSearch() {
-    var query = document.getElementById('search-submit').value;
-    if (query.trim() !== '') {
-        // Get the current list of recent searches from local storage
-        var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
 
-        // Add the new search query to the list
-        recentSearches.push(query);
-
-        // Limit the number of recent searches (optional)
-        var maxRecentSearches = 5;
-        recentSearches = recentSearches.slice(-maxRecentSearches);
-
-        // Save the updated list back to local storage
-        localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-
-      
-        displayRecentSearches();
-    }
-}
-
-function displayRecentSearches() {
-    var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
-    var recentSearchList = document.getElementById('recentSearchList');
-    recentSearchList.innerHTML = "" ;
-
-    recentSearches.forEach(function(query) {
-        var listItem = document.createElement('li');
-        listItem.textContent = query;
-        recentSearchList.appendChild(listItem);
-    });
-}
 
 
 displayRecentSearches();
@@ -69,6 +38,7 @@ let weather = {
         document.querySelector(".temp").innerText = temp + "°C";
         document.querySelector(".humidity").innerText = "humidity " + humidity + "%";
         document.querySelector(".wind").innerText = "wind speed: " + speed + " km/h"
+        document.querySelector(".icon").innerText =
     },
    search: function() {
    this.fetchWeather(document.querySelector(".search-hold").value);
@@ -84,4 +54,3 @@ document.querySelector(".search-hold").addEventListener("keyup", function(event)
     }
 })
 
-weather.fetchWeather("Denver");
