@@ -1,7 +1,4 @@
 // input city data fetch to display info  
-  
-
-
 
 var dispName = document.querySelector(".display-input-name")
 var dispCountry = document.querySelector(".display-input-country")
@@ -25,25 +22,19 @@ searchBar.addEventListener('submit', function (event) {
 
         getCityUrlShawn(searchCity);
     
-//console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
+    // Searching for hotels with searchTerm.value below
+    document.querySelector("#hotels").innerHTML = "";
+    getCityID(event.target.searchTerm.value);
 
+    // Searching for restaurants via yelp
+    getRestaurants(event.target.searchTerm.value);
 
-// Searching for hotels with searchTerm.value below
-document.querySelector("#hotels").innerHTML = "";
-getCityID(event.target.searchTerm.value);
-
-// Searching for restaurants via yelp
-getRestaurants(event.target.searchTerm.value);
-
-if (searchCity) {
-    cityHeader.setAttribute("class", "hidden");
-    getCityURL(searchCity);
+    //SETTING HEADER
+    if (searchCity) {
+        cityHeader.setAttribute("class", "hidden");
+        getCityURL(searchCity);
 }
 })
-
-
-
-
 
 //fetch request to grab photos, name ,country and population for searched city
 
@@ -58,8 +49,6 @@ function showName(cityUrl,searchCity) {
     })
 
 }
-
-
 
 function getCityUrlShawn(searchCity) {
     var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
@@ -130,32 +119,40 @@ function getImageAbout(cityPath,searchCity) {
 
 
  function getImageShawn(imageUrlAbout,searchCity){
- fetch(imageUrlAbout).then(function(response) {
-     return response.json();
- }).then(function(data) {
-  
-    var imgCity = data.photos[0].image.web
-       console.log(imgCity)
-     setImg(imgCity,searchCity)
- })
+    fetch(imageUrlAbout).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+    
+        var imgCity = data.photos[0].image.web
+        console.log(imgCity)
+        setImg(imgCity,searchCity)
+    })
  }
-    function setImg (imgCity,searchCity){
 
-   cityCardHeader.src = imgCity
-  dispName.innerHTML = searchCity;
-    }
+function setImg (imgCity,searchCity){
+
+    cityCardHeader.src = imgCity
+    dispName.innerHTML = searchCity;
+}
        
 
 function getCity(cityurl, searchCity) {
     var cityIdURL;
+    var latitude;
+    var longitude;
+
     fetch(cityurl).then(function(response) {
         return response.json();
     }).then(function (data) {
         cityIdURL = data._links["city:urban_area"].href;
-        // cityImage = data.photos[0].image.web;
+        
+        latitude = data.location.latlon.latitude
+        longitude = data.location.latlon.longitude;
 
         //console.log(cityIdURL);
+        //console.log(latLong)
         getCityImageURL(cityIdURL, searchCity)
+        getMap(latitude, longitude, searchCity)
     })
     
 }
@@ -285,3 +282,14 @@ function getRestaurants(searchTerm) {
 };
 
 // Map
+
+var mapImage = document.querySelector('#map-image');
+mapImage.setAttribute("class", "hidden");
+
+function getMap(lat, long, city) {
+    mapURL = 'https://dev.virtualearth.net/REST/V1/Imagery/Map/Road/' + lat + '%2C' + long + '/13?mapSize=600%2C300&format=png&key=AjpBW5YPLt1z69jc_F5gvBQ1c9UMsLKKXp7pvnaEB16G1gyV-tb1-0leGlXqVVyk';
+    
+    mapImage.setAttribute("src", mapURL);
+    mapImage.setAttribute("alt", city);
+    mapImage.removeAttribute("class", "hidden");
+}
