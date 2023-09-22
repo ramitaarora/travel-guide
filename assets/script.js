@@ -71,10 +71,10 @@ function getCityUrlShawn(searchCity) {
             const element = cities[index];
             cityUrl.push(element._links["city:item"].href);
         }
-        cityUrl = cityURL[0];
+        cityUrl = cityUrl[0];
         console.log(cityUrl)
        urlofCity(cityUrl,searchCity)
-       showName(cityurl, searchCity)
+       showName(cityUrl, searchCity)
     })
 }
 // City Header
@@ -93,9 +93,9 @@ function getCityURL(searchCity) {
 
         for (let index = 0; index < cities.length; index++) {
             const element = cities[index];
-            cityUrl.push(element._links["city:item"].href);
+            cityURL.push(element._links["city:item"].href);
         }
-        cityUrl = cityURL[0];
+        cityURL = cityURL[0];
         getCity(cityURL, searchCity);
        
     })
@@ -124,6 +124,8 @@ function getImageAbout(cityPath,searchCity) {
         getImageShawn(imageUrlAbout, searchCity);
     })
 }
+
+
  function getImageShawn(imageUrlAbout,searchCity){
  fetch(imageUrlAbout).then(function(response) {
      return response.json();
