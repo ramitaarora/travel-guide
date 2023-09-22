@@ -258,8 +258,6 @@ function getRestaurants(searchTerm) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            console.log(data.businesses[0].id);
             getYelpReviews(data.businesses[0].id);
 
             document.querySelector("#yelp").innerHTML = "";
@@ -294,7 +292,6 @@ function getRestaurants(searchTerm) {
             for (j = 0; j < 5; j++) {
                 modalName = document.getElementById(prefix + j);
                 modalName.textContent = data.businesses[j].name;
-                console.log(modalName);
             };
         });
 };
@@ -311,7 +308,22 @@ function getYelpReviews(restaurantID) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+
+            var prefix = "yelpReview";
+            var modalReviews;
+            for (i = 0; i < 5; i++) {
+                modalReviews = document.getElementById(prefix + i);
+                
+                var reviewText = document.createElement("p");
+                var signedName = document.createElement("p");
+                var review = data.reviews[i].text;
+                var date = data.reviews[i].time_created;
+                var name = data.reviews[i].user.name;
+
+                reviewText.append(review);
+                signedName.append(name, date);
+                modalReviews.append(reviewText, signedName);
+            };
         })
 };
 
