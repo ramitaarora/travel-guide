@@ -34,7 +34,7 @@ searchBar.addEventListener('submit', function (event) {
 
 
 
-        fetch("https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search="+ searchCity ).then(function(resp) {
+        fetch("https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search="+ searchCity).then(function(resp) {
             console.log(resp);
             return resp.json()
         }).then(function(data) {
@@ -47,8 +47,8 @@ searchBar.addEventListener('submit', function (event) {
             
             
             var iFrame = document.createElement("iframe");
-            iFrame.setAttribute("src",articleUrl);
-            iFrame.setAttribute("width","100%");
+            iFrame.setAttribute("src",wikiId);
+            
             
             var divEl = document.querySelector("#article");
             divEl.append(iFrame)
