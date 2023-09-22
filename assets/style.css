@@ -79,3 +79,5 @@ img {
     display: flex;
     align-items: center;
 }
+
+.weather.loading
