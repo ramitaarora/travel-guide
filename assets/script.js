@@ -256,5 +256,28 @@ function getRestaurants(searchTerm) {
         })
         .then(function (data) {
             console.log(data);
+
+            document.querySelector("#yelp").innerHTML = "";
+            var displayLength = 5
+
+            for (i = 0; i < displayLength; i++) {
+                var yelpName = document.createElement("p");
+                var yelpRating = document.createElement("p");
+                var yelpPhone = document.createElement("p");
+                var yelpPhoto = document.createElement("img")
+                var name = data.businesses[i].name;
+                var rating = data.businesses[i].rating;
+                var phone = data.businesses[i].display_phone;
+                var photos = data.businesses[i].image_url;
+
+                yelpName.textContent = "Restaurant Name: ";
+                yelpRating.textContent = "Rating: ";
+                yelpPhone.textContent = "Phone Number: ";
+                yelpPhoto.setAttribute('src', photos);
+                yelpName.append(name);
+                yelpRating.append(rating);
+                yelpPhone.append(phone);
+                document.querySelector("#hotels").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+            };
         });
 };
