@@ -244,7 +244,7 @@ function getCityID(searchTerm) {
 // Restaurants (Yelp)
 
 function getRestaurants(searchTerm) {
-    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&sort_by=rating&limit=5', {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&term=restaurants&sort_by=rating&limit=5', {
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -270,7 +270,7 @@ function getRestaurants(searchTerm) {
                 var phone = data.businesses[i].display_phone;
                 var photos = data.businesses[i].image_url;
                 var icon = document.createElement("i");
-                
+
                 icon.setAttribute("class", "fa-solid fa-star fa-sm");
                 icon.style = "color:#f0e800";
                 yelpName.textContent = "Restaurant Name: ";
