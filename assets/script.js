@@ -19,7 +19,7 @@ var searchButton = document.querySelector('#search-submit');
 
 searchBar.addEventListener('submit', function(event) {
     event.preventDefault();
-    //console.log(event.target.searchTerm.value); // Accessing the city typed in the search bar
+   
     var searchCity = event.target.searchTerm.value;
 
 
@@ -29,46 +29,9 @@ searchBar.addEventListener('submit', function(event) {
 
 
 
- //fetch request to get city name, region and population
-
-//  function getCity(searchCity) {
-    
-//  var url = 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/' + searchCity;
-    
-
-//  fetch(url, {
-//   method: 'GET',
-//    headers: {
-//      'X-RapidAPI-Key': '964ebf4356msh7a0bb58633e129ep1376dfjsn57fb259d2f72',
-//      'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
-//  }
-  
-//  })
-//    .then(function (response) {
-//      return response.json();
-//    })
-//    .then(function (data) {
-//      console.log(data);
-//      displayName(data)
-//    });
 
 
-//   // display function to show population, 
-//   var displayName = function(data){
-  
-//   if (data.data === 0) {
-//     return;
-
-//   }
-//   else {
-//     dispName.textContent = data.data.name
-//     dispCountry.textContent = data.data.country
-//     dispPopulation.textContent = ('POPULATION: '+ data.data.population)
-//   }
-
-// }
-//  }
-//fetch request to grab photos for searched city
+//fetch request to grab photos, name ,country and population for searched city
 
 function showName(cityURL,searchCity) {
     fetch(cityURL).then(function(response) {
