@@ -23,7 +23,7 @@ searchBar.addEventListener('submit', function(event) {
     var searchCity = event.target.searchTerm.value;
 
 
-        getCityURL(searchCity);
+        getCityUrl(searchCity);
     
 })
 
@@ -33,8 +33,8 @@ searchBar.addEventListener('submit', function(event) {
 
 //fetch request to grab photos, name ,country and population for searched city
 
-function showName(cityURL,searchCity) {
-    fetch(cityURL).then(function(response) {
+function showName(cityUrl,searchCity) {
+    fetch(cityUrl).then(function(response) {
         return response.json();
     }).then(function(data){
         console.log(data._links['city:country'].name)
@@ -49,7 +49,7 @@ function showName(cityURL,searchCity) {
 
 function getCityURL(searchCity) {
     var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
-    var cityURL = [];
+    var cityUrl = [];
 
     fetch(url).then(function(response) {
         return response.json();
@@ -58,18 +58,18 @@ function getCityURL(searchCity) {
 
         for (let index = 0; index < cities.length; index++) {
             const element = cities[index];
-            cityURL.push(element._links["city:item"].href);
+            cityUrl.push(element._links["city:item"].href);
         }
-        cityURL = cityURL[0];
-        console.log(cityURL)
-       urlofCity(cityURL,searchCity)
-       showName(cityURL, searchCity)
+        cityUrl = cityURL[0];
+        console.log(cityUrl)
+       urlofCity(cityUrl,searchCity)
+       showName(cityurl, searchCity)
     })
 }
 
-function urlofCity(cityurl, searchCity) {
+function urlofCity(cityUrl, searchCity) {
          var cityPath;
-         fetch(cityurl).then(function(response) {
+         fetch(cityUrl).then(function(response) {
              return response.json();
          }).then(function (data) {
              cityPath = data._links["city:urban_area"].href;
