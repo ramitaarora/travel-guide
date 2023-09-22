@@ -29,9 +29,6 @@ function getHotels(cityID) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            console.log(data.properties[0], data.properties[0].name);
-
             var displayLength = 3
 
             for (i = 0; i < displayLength; i++) {
@@ -63,8 +60,6 @@ function getCityID(searchTerm) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            console.log(data.data[0].gaiaId);
             getHotels(data.data[0].gaiaId);
         });
 };
