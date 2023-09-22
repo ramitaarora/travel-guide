@@ -1,9 +1,13 @@
-<<<<<<< HEAD
-
-
-=======
 // input city data fetch to display info  
->>>>>>> main
+
+var dispName = document.querySelector(".display-input-name")
+var dispCountry = document.querySelector(".display-input-country")
+var dispPopulation = document.querySelector(".display-input-population")
+var dispLanguage = document.querySelector(".display-input-language")
+var dispCurrency = document.querySelector(".display-input-currency")
+var dispTime = document.querySelector(".display-input-time")
+var dispAbout = document.querySelector(".display-input-about")
+var cityCardHeader = document.querySelector('#city-card')
 
 // Navigation/Search Bar
 
@@ -19,15 +23,7 @@ searchBar.addEventListener('submit', function (event) {
     document.querySelector("#hotels").innerHTML = "";
     getCityID(event.target.searchTerm.value);
 
-<<<<<<< HEAD
-    if (searchCity) {
-        cityHeader.setAttribute("class", "hidden");
-        getCityURL(searchCity);
-    }
-})
-
-=======
-        getCityUrlShawn(searchCity);
+    getCityUrlShawn(searchCity);
     
     // Searching for hotels with searchTerm.value below
     document.querySelector("#hotels").innerHTML = "";
@@ -36,7 +32,7 @@ searchBar.addEventListener('submit', function (event) {
     // Searching for restaurants via yelp
     getRestaurants(event.target.searchTerm.value);
 
-    //SETTING HEADER
+    // Setting header
     if (searchCity) {
         cityHeader.setAttribute("class", "hidden");
         getCityURL(searchCity);
@@ -76,7 +72,6 @@ function getCityUrlShawn(searchCity) {
        showName(cityUrl, searchCity)
     })
 }
->>>>>>> main
 // City Header
 
 var cityHeader = document.querySelector('#city-header');
@@ -102,11 +97,6 @@ function getCityURL(searchCity) {
     })
 }
 
-<<<<<<< HEAD
-function getCity(cityurl) {
-    var cityIdURL;
-    var cityNameAPI;
-=======
 function urlofCity(cityUrl, searchCity) {
          var cityPath;
          fetch(cityUrl).then(function(response) {
@@ -154,28 +144,21 @@ function getCity(cityurl, searchCity) {
     var cityIdURL;
     var latitude;
     var longitude;
+    var cityNameAPI;
 
->>>>>>> main
     fetch(cityurl).then(function(response) {
         return response.json();
     }).then(function (data) {
         cityIdURL = data._links["city:urban_area"].href;
-<<<<<<< HEAD
         cityNameAPI = data.full_name;
-
-        //console.log(cityIdURL);
-        //console.log(cityNameAPI)
-        getCityImageURL(cityIdURL, cityNameAPI)
-=======
-        
         latitude = data.location.latlon.latitude
         longitude = data.location.latlon.longitude;
 
         //console.log(cityIdURL);
         //console.log(latLong)
-        getCityImageURL(cityIdURL, searchCity)
+        //console.log(cityNameAPI)
+        getCityImageURL(cityIdURL, cityNameAPI)
         getMap(latitude, longitude, searchCity)
->>>>>>> main
     })
     
 }
