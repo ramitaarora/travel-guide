@@ -4,3 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.hidden {
+    display: none !important;
+}
+
+#city-header {
+    height: 272px;
+    background-position: center;
+    display:flex;
+    align-items: end;
+}
