@@ -23,7 +23,7 @@ searchBar.addEventListener('submit', function(event) {
     var searchCity = event.target.searchTerm.value;
 
 
-        getCityUrl(searchCity);
+        getCityUrlShawn(searchCity);
     
 })
 
@@ -47,7 +47,7 @@ function showName(cityUrl,searchCity) {
 
 
 
-function getCityURL(searchCity) {
+function getCityUrlShawn(searchCity) {
     var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
     var cityUrl = [];
 
@@ -87,10 +87,10 @@ function getImageAbout(cityPath,searchCity) {
     }).then(function(data) {
         imageUrlAbout = data._links["ua:images"].href;
         console.log(imageUrlAbout);
-        getImage(imageUrlAbout, searchCity);
+        getImageShawn(imageUrlAbout, searchCity);
     })
 }
- function getImage(imageUrlAbout,searchCity){
+ function getImageShawn(imageUrlAbout,searchCity){
  fetch(imageUrlAbout).then(function(response) {
      return response.json();
  }).then(function(data) {
