@@ -32,6 +32,9 @@ searchBar.addEventListener('submit', function (event) {
 document.querySelector("#hotels").innerHTML = "";
 getCityID(event.target.searchTerm.value);
 
+// Searching for restaurants via yelp
+getRestaurants(event.target.searchTerm.value);
+
 if (searchCity) {
     cityHeader.setAttribute("class", "hidden");
     getCityURL(searchCity);
@@ -235,5 +238,23 @@ function getCityID(searchTerm) {
         })
         .then(function (data) {
             getHotels(data.data[0].gaiaId);
+        });
+};
+
+// Restaurants (Yelp)
+
+function getRestaurants(searchTerm) {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&sort_by=rating&limit=5', {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer 8GkrzCSBb-7hLtDuXuJFVo0NAkoGFSiYYiTLv-lf5MjJOIq0e0KuCx1_MZeT7FXWNZwGof-Y1mjZEjBm79e9v9M4ErO3jeS6sw-9UK6ZYWVbFYNMVdHuK06aY8QNZXYx'
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
         });
 };
