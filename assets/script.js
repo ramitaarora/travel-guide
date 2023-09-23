@@ -24,6 +24,7 @@ searchBar.addEventListener('submit', function (event) {
     getCityID(event.target.searchTerm.value);
 
     getCityUrlShawn(searchCity);
+    getWikiData(searchCity)
     
     // Searching for hotels with searchTerm.value below
     document.querySelector("#hotels").innerHTML = "";
@@ -381,3 +382,52 @@ function getMap(lat, long, city) {
     mapImage.setAttribute("alt", city);
     mapImage.removeAttribute("class", "hidden");
 }
+
+function getWikiData(searchCity) {
+fetch("https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search="+ searchCity).then(function(resp) {
+            console.log(resp);
+            return resp.json()
+        }).then(function(data) {
+            console.log(data);
+            var wikiId = data[3][0]
+            console.log(wikiId)
+            
+
+         
+            
+            
+            var iFrame = document.createElement("iframe");
+            iFrame.setAttribute("src",wikiId);
+            iFrame.setAttribute("width",'100%');
+            
+            
+            var divEl = document.querySelector("#article");
+            divEl.append(iFrame)
+            getWikiHeader(wikiId)
+
+        })}
+
+
+
+        $('#myCarousel').carousel({
+            interval: 3000
+          })
+          
+          $('.carousel .carousel-item').each(function(){
+              var minPerSlide = 3;
+              var next = $(this).next();
+              if (!next.length) {
+              next = $(this).siblings(':first');
+              }
+              next.children(':first-child').clone().appendTo($(this));
+              
+              for (var i=0;i<minPerSlide;i++) {
+                  next=next.next();
+                  if (!next.length) {
+                      next = $(this).siblings(':first');
+                    }
+                  
+                  next.children(':first-child').clone().appendTo($(this));
+                }
+          });
+        
