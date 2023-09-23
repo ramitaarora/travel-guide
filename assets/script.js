@@ -306,6 +306,8 @@ function getRestaurants(searchTerm) {
 
 // Option 1: Use one function to pass data into separate arrays that can be used to append to each modal.
 
+var reviewsArray = [];
+
 function getYelpReviews(restaurantID, index) {
     fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
         method: 'GET',
@@ -318,11 +320,8 @@ function getYelpReviews(restaurantID, index) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-
-            var reviewsArray = [];
-
             var length = 3
+
             for (j = 0; j < length; j++) {
                 var review = data.reviews[j].text;
                 var name = data.reviews[j].user.name;
@@ -338,36 +337,32 @@ function getYelpReviews(restaurantID, index) {
                 reviewsArray.push(reviewObject);
                 console.log(reviewsArray);
             };
+
+            displayReviews();
         })
+};
 
-        // Attempted with for loop inside for loop below. Don't think this works.
+function displayReviews() {
 
-        // .then(function (data) {
-        //     console.log(data);
+    var prefix = "yelpReview";
+    var modalReviews;
 
-        //     var prefix = "yelpReview";
-        //     var modalReviews;
-        //     var modalLength = 5;
-        //     var length = 3
-        //     for (k = 0; k < length; k++) {
-        //         modalReviews = document.getElementById(prefix + k);
-        //         var signedReview = document.createElement("p");
-        //         var signedName = document.createElement("p");
-        //         var signedDate = document.createElement("p");
-        //         var review = data.reviews[k].text;
-        //         var name = data.reviews[k].user.name;
-        //         var date = data.reviews[k].time_created;
+    for (i = 0; i < reviewsArray.length; i++) {
+        var reviewID = reviewsArray[i].restaurantID;
+        modalReviews = document.getElementById(prefix + reviewID);
 
-        //         signedReview.textContent = review;
-        //         signedName.append(name);
-        //         signedDate.append(date);
-        //         modalReviews.append(signedReview, signedName, signedDate);
+        var reviewTextEl = document.createElement("p");
+        var reviewerNameEl = document.createElement("p");
+        var reviewDateEl = document.createElement("p");
 
-        //         for (n = 0; n < modalLength; n++) {
-        //             modalReviews = document.getElementById(prefix + n);
-        //         };
-        //     };
-        // })   
+        reviewTextEl.textContent = reviewsArray[i].reviewText;
+        reviewerNameEl.textContent = "Reviewer Name: " + reviewsArray[i].reviewerName;
+        reviewDateEl.textContent = "Review Date: " + reviewsArray[i].reviewDate;
+
+        modalReviews.append(reviewTextEl);
+        modalReviews.append(reviewerNameEl);
+        modalReviews.append(reviewDateEl);
+    };
 };
 
 // Option 2: Trying two separate function where I pass data to another function
