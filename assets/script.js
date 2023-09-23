@@ -260,9 +260,10 @@ function getRestaurants(searchTerm) {
         .then(function (data) {
 
             document.querySelector("#yelp").innerHTML = "";
-            var displayLength = 5
+            var displayLength = 5;
 
             for (i = 0; i < displayLength; i++) {
+
                 var yelpName = document.createElement("p");
                 var yelpRating = document.createElement("p");
                 var yelpPhone = document.createElement("p");
@@ -272,7 +273,6 @@ function getRestaurants(searchTerm) {
                 var rating = data.businesses[i].rating;
                 var phone = data.businesses[i].display_phone;
                 var photos = data.businesses[i].image_url;
-                
 
                 icon.setAttribute("class", "fa-solid fa-star fa-sm");
                 icon.style = "color:#f0e800";
@@ -285,9 +285,12 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
                 $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
-                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal'+ [i] +'">Click for Reviews</button>')
-                
-                getYelpReviews(data.businesses[i].id);
+                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal' + [i] + '">Click for Reviews</button>')
+
+                // Order of arrays not same as order of businesses displayed on screen. Why?
+                // setTimeout(getYelpReviews(data.businesses[i].id), 5000);
+
+                getYelpReviews(data.businesses[i].id, i)
             };
 
             var prefix = "yelpName";
@@ -299,16 +302,11 @@ function getRestaurants(searchTerm) {
         });
 };
 
-document.addEventListener("click", function() {
-    // Add business alias/id to the button, so when it is pressed, I can get reviews for this and post to corresponding modal.
-    // When review button is pressed, run getYelpReviews function with associated business alias/id, 
-})
-
 // Displays reviews in modals
 
-// var allReviews = [];
+// Option 1: Use one function to pass data into separate arrays that can be used to append to each modal.
 
-function getYelpReviews(restaurantID) {
+function getYelpReviews(restaurantID, index) {
     fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
         method: 'GET',
         headers: {
@@ -322,40 +320,101 @@ function getYelpReviews(restaurantID) {
         .then(function (data) {
             console.log(data);
 
-            var review0 = data.reviews[0].text;
-            var review1 = data.reviews[1].text;
-            var review2 = data.reviews[2].text;
-            $("#yelp").append(review0, review1, review2);
+            var reviewsArray = [];
 
-            // var review = data.reviews[0].text;
-            // allReviews.push(review);
-            // console.log(allReviews);
-        
-            // var length = 3
-            // for (k = 0; k < length; k++) {
-            //     var review = data.reviews[k].text;
-            //     allReviews.push(review);
-            // }
+            var length = 3
+            for (j = 0; j < length; j++) {
+                var review = data.reviews[j].text;
+                var name = data.reviews[j].user.name;
+                var date = data.reviews[j].time_created;
 
-            // var prefix = "yelpReview";
-            // var modalReviews;
-            // var length = 3
-            // for (k = 0; k < length; k++) {
-            //     // modalReviews = document.getElementById(prefix + k);
-            //     var signedReview = document.createElement("p");
-            //     var signedName = document.createElement("p");
-            //     var signedDate = document.createElement("p");
-            //     var review = data.reviews[k].text;
-            //     var date = data.reviews[k].time_created;
-            //     var name = data.reviews[k].user.name;
+                var reviewObject = {
+                    restaurantID: index,
+                    reviewText: review,
+                    reviewName: name,
+                    reviewDate: date
+                };
 
-            //     signedReview.textContent = review;
-            //     signedName.append(name);
-            //     signedDate.append(date);
-            //     modalReviews.append(signedReview, signedName, signedDate);
-            // };
+                reviewsArray.push(reviewObject);
+                console.log(reviewsArray);
+            };
         })
+
+        // Attempted with for loop inside for loop below. Don't think this works.
+
+        // .then(function (data) {
+        //     console.log(data);
+
+        //     var prefix = "yelpReview";
+        //     var modalReviews;
+        //     var modalLength = 5;
+        //     var length = 3
+        //     for (k = 0; k < length; k++) {
+        //         modalReviews = document.getElementById(prefix + k);
+        //         var signedReview = document.createElement("p");
+        //         var signedName = document.createElement("p");
+        //         var signedDate = document.createElement("p");
+        //         var review = data.reviews[k].text;
+        //         var name = data.reviews[k].user.name;
+        //         var date = data.reviews[k].time_created;
+
+        //         signedReview.textContent = review;
+        //         signedName.append(name);
+        //         signedDate.append(date);
+        //         modalReviews.append(signedReview, signedName, signedDate);
+
+        //         for (n = 0; n < modalLength; n++) {
+        //             modalReviews = document.getElementById(prefix + n);
+        //         };
+        //     };
+        // })   
 };
+
+// Option 2: Trying two separate function where I pass data to another function
+
+// function getYelpReviews(restaurantID) {
+//     fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
+//         method: 'GET',
+//         headers: {
+//             accept: 'application/json',
+//             Authorization: 'Bearer 8GkrzCSBb-7hLtDuXuJFVo0NAkoGFSiYYiTLv-lf5MjJOIq0e0KuCx1_MZeT7FXWNZwGof-Y1mjZEjBm79e9v9M4ErO3jeS6sw-9UK6ZYWVbFYNMVdHuK06aY8QNZXYx'
+//         }
+//     })
+//         .then(function (response) {
+//             var data = response.json();
+//         })
+// };
+
+// function separateReviews(data) {
+//     var modalReviews;
+//     for (m = 0; m < displayLength; m++) {
+//         var test = allID[m];
+//         modalReviews = document.getElementById(prefix + m);
+
+//         for (n = 0; n < 3; n++) {
+
+//             var signedReview = document.createElement("p");
+//             var signedName = document.createElement("p");
+
+//             var review = data.reviews[n].text;
+//             var name = data.reviews[n].user.name;
+
+//             signedReview.textContent = review;
+//             signedName.append(name);
+
+//             modalReviews.append(signedReview, signedName);
+//         }
+//     };
+// }
+
+// function setReviews(x, y, z) {
+//     var length = 5;
+//     for (i = 0; i < length; i++) {
+//         prefix = "yelpReview";
+//         var modalReviews = document.getElementById(prefix + i);
+//         modalReviews.append(x, y, z);
+//     };
+// }
 
 // Map
 
