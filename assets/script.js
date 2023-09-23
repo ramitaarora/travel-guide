@@ -266,12 +266,12 @@ function getRestaurants(searchTerm) {
                 var yelpName = document.createElement("p");
                 var yelpRating = document.createElement("p");
                 var yelpPhone = document.createElement("p");
-                var yelpPhoto = document.createElement("img")
+                var yelpPhoto = document.createElement("img");
+                var icon = document.createElement("i");
                 var name = data.businesses[i].name;
                 var rating = data.businesses[i].rating;
                 var phone = data.businesses[i].display_phone;
                 var photos = data.businesses[i].image_url;
-                var icon = document.createElement("i");
                 
 
                 icon.setAttribute("class", "fa-solid fa-star fa-sm");
@@ -286,25 +286,30 @@ function getRestaurants(searchTerm) {
                 yelpPhone.append(phone);
                 $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
                 $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal'+ [i] +'">Click for Reviews</button>')
-
+                
                 getYelpReviews(data.businesses[i].id);
             };
 
             var prefix = "yelpName";
             var modalName;
-// Need to fix restaurant name in review modal
             for (j = 0; j < 5; j++) {
                 modalName = document.getElementById(prefix + j);
                 modalName.textContent = data.businesses[j].name;
-                console.log(data.businesses[j].name);
             };
         });
 };
 
+document.addEventListener("click", function() {
+    // Add business alias/id to the button, so when it is pressed, I can get reviews for this and post to corresponding modal.
+    // When review button is pressed, run getYelpReviews function with associated business alias/id, 
+})
+
 // Displays reviews in modals
 
+// var allReviews = [];
+
 function getYelpReviews(restaurantID) {
-    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=6&sort_by=yelp_sort', {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -316,24 +321,39 @@ function getYelpReviews(restaurantID) {
         })
         .then(function (data) {
             console.log(data);
-            var prefix = "yelpReview";
-            var modalReviews;
-            var length = 5
-            for (k = 0; k < length; k++) {
-                modalReviews = document.getElementById(prefix + k);
-                
-                var signedReview = document.createElement("p");
-                var signedName = document.createElement("p");
-                var signedDate = document.createElement("p");
-                var review = data.reviews[k].text;
-                var date = data.reviews[k].time_created;
-                var name = data.reviews[k].user.name;
 
-                signedReview.textContent = review;
-                signedName.append(name);
-                signedDate.append(date);
-                modalReviews.append(signedReview, signedName, signedDate);
-            };
+            var review0 = data.reviews[0].text;
+            var review1 = data.reviews[1].text;
+            var review2 = data.reviews[2].text;
+            $("#yelp").append(review0, review1, review2);
+
+            // var review = data.reviews[0].text;
+            // allReviews.push(review);
+            // console.log(allReviews);
+        
+            // var length = 3
+            // for (k = 0; k < length; k++) {
+            //     var review = data.reviews[k].text;
+            //     allReviews.push(review);
+            // }
+
+            // var prefix = "yelpReview";
+            // var modalReviews;
+            // var length = 3
+            // for (k = 0; k < length; k++) {
+            //     // modalReviews = document.getElementById(prefix + k);
+            //     var signedReview = document.createElement("p");
+            //     var signedName = document.createElement("p");
+            //     var signedDate = document.createElement("p");
+            //     var review = data.reviews[k].text;
+            //     var date = data.reviews[k].time_created;
+            //     var name = data.reviews[k].user.name;
+
+            //     signedReview.textContent = review;
+            //     signedName.append(name);
+            //     signedDate.append(date);
+            //     modalReviews.append(signedReview, signedName, signedDate);
+            // };
         })
 };
 
