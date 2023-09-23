@@ -199,7 +199,7 @@ function getHotels(cityID) {
     fetch('https://hotels-com-provider.p.rapidapi.com/v2/hotels/search?sort_order=RECOMMENDED&locale=en_US&checkin_date=2023-09-26&adults_number=1&domain=US&region_id=' + cityID + '&checkout_date=2023-09-27', {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '964ebf4356msh7a0bb58633e129ep1376dfjsn57fb259d2f72',
+            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004 ',
             'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
     })
@@ -232,7 +232,7 @@ function getCityID(searchTerm) {
     fetch(requestURL, {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '964ebf4356msh7a0bb58633e129ep1376dfjsn57fb259d2f72',
+            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004',
             'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
     })
@@ -304,8 +304,6 @@ function getRestaurants(searchTerm) {
 
 // Displays reviews in modals
 
-// Option 1: Use one function to pass data into separate arrays that can be used to append to each modal.
-
 var reviewsArray = [];
 
 function getYelpReviews(restaurantID, index) {
@@ -347,6 +345,11 @@ function displayReviews() {
     var prefix = "yelpReview";
     var modalReviews;
 
+    for (j = 0; j < 5; j++) {
+        var clearReviews = document.getElementById(prefix + j);
+        clearReviews.innerHTML = "";
+    };
+
     for (i = 0; i < reviewsArray.length; i++) {
         var reviewID = reviewsArray[i].restaurantID;
         modalReviews = document.getElementById(prefix + reviewID);
@@ -354,62 +357,17 @@ function displayReviews() {
         var reviewTextEl = document.createElement("p");
         var reviewerNameEl = document.createElement("p");
         var reviewDateEl = document.createElement("p");
+        var space = document.createElement("hr");
 
         reviewTextEl.textContent = reviewsArray[i].reviewText;
-        reviewerNameEl.textContent = "Reviewer Name: " + reviewsArray[i].reviewerName;
+        reviewerNameEl.textContent = "Reviewer Name: " + reviewsArray[i].reviewName;
         reviewDateEl.textContent = "Review Date: " + reviewsArray[i].reviewDate;
 
         modalReviews.append(reviewTextEl);
         modalReviews.append(reviewerNameEl);
-        modalReviews.append(reviewDateEl);
+        modalReviews.append(reviewDateEl, space);
     };
 };
-
-// Option 2: Trying two separate function where I pass data to another function
-
-// function getYelpReviews(restaurantID) {
-//     fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
-//         method: 'GET',
-//         headers: {
-//             accept: 'application/json',
-//             Authorization: 'Bearer 8GkrzCSBb-7hLtDuXuJFVo0NAkoGFSiYYiTLv-lf5MjJOIq0e0KuCx1_MZeT7FXWNZwGof-Y1mjZEjBm79e9v9M4ErO3jeS6sw-9UK6ZYWVbFYNMVdHuK06aY8QNZXYx'
-//         }
-//     })
-//         .then(function (response) {
-//             var data = response.json();
-//         })
-// };
-
-// function separateReviews(data) {
-//     var modalReviews;
-//     for (m = 0; m < displayLength; m++) {
-//         var test = allID[m];
-//         modalReviews = document.getElementById(prefix + m);
-
-//         for (n = 0; n < 3; n++) {
-
-//             var signedReview = document.createElement("p");
-//             var signedName = document.createElement("p");
-
-//             var review = data.reviews[n].text;
-//             var name = data.reviews[n].user.name;
-
-//             signedReview.textContent = review;
-//             signedName.append(name);
-
-//             modalReviews.append(signedReview, signedName);
-//         }
-//     };
-// }
-
-// function setReviews(x, y, z) {
-//     var length = 5;
-//     for (i = 0; i < length; i++) {
-//         prefix = "yelpReview";
-//         var modalReviews = document.getElementById(prefix + i);
-//         modalReviews.append(x, y, z);
-//     };
-// }
 
 // Map
 
