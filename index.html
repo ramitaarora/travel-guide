@@ -19,133 +19,126 @@
 <body>
   <header>
     <!--nav bar-->
-    <nav class="container text-center bg-dark text-white min-w-full p-6 flex justify-between items-center">  
+    <nav class="text-center bg-dark text-white d-flex justify-content-between align-items-center p-3">  
       <h1 class="text-2xl font-bold ">Travel Guide</h1>
-      <form id="search-bar">
-        <input type="text" class="p-1 text-black mr-5" name="searchTerm" placeholder="Search by City"/>
-        <input type="submit" class="bg-gray-600 text-white rounded-full px-4 py-1 hover:cursor-pointer" id="search-submit" value="Search"/>
+      <form id="search-bar" class="d-flex">
+        <input type="text" class="form-control me-2" name="searchTerm" placeholder="Search by City"/>
+        <input type="submit" class="btn btn-outline-light px-4 py-1" id="search-submit" value="Search"/>
       </form>
     </nav>
-
+    <!--city header-->
     <section id="city-header" class="hidden">
-      <h2 id="city-name" class="text-3xl text-white backdrop-blur-sm w-full p-1">City Name</h2>
+      <h2 id="city-name" class="text-3xl text-white m-0 p-1">City Name</h2>
     </section>
   </header>
-
-
-
- 
-      
+     
   <!--suggested cities -->
-  <div class="container text-center my-3">
-    <h2 class="font-weight-light">THE TROTTERS TOP PLACES TO VISIT!</h2>
-    <div class="row mx-auto my-auto">
-        <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
-                <div class="carousel-item active ">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/sydney image.jpeg">
-                        <div class="carousel-caption d-none d-md-block">
-                           
-                            </div>
-                           <h3>Sydney</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/italy.jpeg">
-                        <div class="carousel-caption d-none d-md-block">
+    <div class="container text-center my-3">
+      <h2 class="font-weight-light">THE TROTTERS TOP PLACES TO VISIT!</h2>
+      <div class="row mx-auto my-auto">
+          <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+              <div class="carousel-inner w-100" role="listbox">
+                  <div class="carousel-item active ">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/sydney image.jpeg">
+                          <div class="carousel-caption d-none d-md-block">
                             
-                            </div>
-                          <h3>Italy</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/dubai-travel.avif">
-                        <div class="carousel-caption d-none d-md-block">
-                            
-                             </div>
-                         <h3>Dubai</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/San-Diego-Skyline_web-1080x675.jpg">
-                        <div class="carousel-caption d-none d-md-block">
-                            
-                            </div>
-                          <h3>SanDiego</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/234f7170-c9f4-4cee-a372-1a198e388483.jpg">
-                        <div class="carousel-caption d-none d-md-block">
-                            
-                            </div>
-                          <h3>Moscow</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/tokyo-city-neon-lights.jpg">
-                        <div class="carousel-caption d-none d-md-block">
-                            
-                            </div>
-                          <h3>Tokyo</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/eiffel-tower-paris-france-EIFFEL0217-6ccc3553e98946f18c893018d5b42bde.jpg">
-                        <div class="carousel-caption d-none d-md-block">
-                            
-                            </div>
-                          <h3>Paris</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/download (3).jpeg">
-                        <div class="carousel-caption d-none d-md-block">
-                            
-                            </div>
-                          <h3>Lisbon</h3>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev bg-dark hide " href="#myCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next bg-dark hide" href="#myCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon w-" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-    
-</div>
-  <!--About City-->
+                              </div>
+                            <h3>Sydney</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/italy.jpeg">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                            <h3>Italy</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/dubai-travel.avif">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                          <h3>Dubai</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/San-Diego-Skyline_web-1080x675.jpg">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                            <h3>San Diego</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/234f7170-c9f4-4cee-a372-1a198e388483.jpg">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                            <h3>Moscow</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/tokyo-city-neon-lights.jpg">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                            <h3>Tokyo</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/eiffel-tower-paris-france-EIFFEL0217-6ccc3553e98946f18c893018d5b42bde.jpg">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                            <h3>Paris</h3>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/download (3).jpeg">
+                          <div class="carousel-caption d-none d-md-block">
+                              
+                              </div>
+                            <h3>Lisbon</h3>
+                      </div>
+                  </div>
+              </div>
+              <a class="carousel-control-prev bg-dark hide " href="#myCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next bg-dark hide" href="#myCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon w-" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+              </a>
+          </div>
+      </div>
+      
+  </div>
+  
+<!--About City-->
   <h2 class="display-input-name"></h2>
   <img id="city-card" src=""></img>
   
   <ul>
-  <li class="display-input-country"></li>
-  <li class="display-input-language"></li>
-  <li class="display-input-population"></li>
-  <li class="display-input-currency"></li>
-  <li class="display-input-time"></li>
+    <li class="display-input-country"></li>
+    <li class="display-input-language"></li>
+    <li class="display-input-population"></li>
+    <li class="display-input-currency"></li>
+    <li class="display-input-time"></li>
   </ul>
   <div id="article"></div>
 
 
-<!--suggested cities section-->
-<div></div>
 <!--Recent searches -->
-<div></div>
-<!--About City-->
 <div></div>
 <!--Weather-->
 <div></div>

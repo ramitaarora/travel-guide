@@ -1,9 +1,6 @@
-@config "../tailwind.config.js";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+* {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
 
 .hidden {
     display: none !important;
@@ -14,6 +11,10 @@
     background-position: center;
     display:flex;
     align-items: end;
+}
+
+#city-name {
+  backdrop-filter: blur(10px);
 }
 
 @media (max-width: 992px) {
