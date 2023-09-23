@@ -1,3 +1,4 @@
+// input city data fetch to display info  
 
 var dispName = document.querySelector(".display-input-name")
 var dispCountry = document.querySelector(".display-input-country")
@@ -347,3 +348,4 @@ fetch("https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search="+ 
                   next.children(':first-child').clone().appendTo($(this));
                 }
           });
+        
