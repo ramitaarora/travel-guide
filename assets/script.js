@@ -24,7 +24,8 @@ searchBar.addEventListener('submit', function (event) {
     getCityID(event.target.searchTerm.value);
 
     getCityUrlShawn(searchCity);
-    getWikiData(searchCity)
+    getWikiPageId(searchCity)
+    
     
     // Searching for hotels with searchTerm.value below
     document.querySelector("#hotels").innerHTML = "";
@@ -301,32 +302,43 @@ function getMap(lat, long, city) {
     mapImage.removeAttribute("class", "hidden");
 }
 
-function getWikiData(searchCity) {
-fetch("https://en.wikipedia.org/w/api.php?&origin=*&action=opensearch&search="+ searchCity).then(function(resp) {
-            console.log(resp);
-            return resp.json()
-        }).then(function(data) {
-            console.log(data);
-            var wikiId = data[3][0]
-            console.log(wikiId)
-            
-
-         
-            
-            
-            var iFrame = document.createElement("iframe");
-            iFrame.setAttribute("src",wikiId);
-            iFrame.setAttribute("width",'100%');
-            
-            
-            var divEl = document.querySelector("#article");
-            divEl.append(iFrame)
-            getWikiHeader(wikiId)
-
-        })}
 
 
+        
 
+function getWikiPageId(searchCity) {
+    fetch("https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&exintro=&titles=" + searchCity )
+    .then(function(resp) {
+                console.log(resp);
+                return resp.json()
+            }).then(function(data) {
+                dataNum = Object.keys(data.query.pages)[0]
+                console.log
+            
+
+              var wikiId = (data.query.pages[dataNum].extract)
+              console.log(wikiId)     
+              var divEl = document.querySelector("#article");
+              divEl.innerHTML = `${wikiId}`
+       
+})
+             
+}
+             
+
+
+ 
+
+          
+
+       
+
+          
+               
+      
+
+
+//carousel
         $('#myCarousel').carousel({
             interval: 3000
           })
