@@ -201,7 +201,7 @@ function getHotels(cityID) {
     fetch('https://hotels-com-provider.p.rapidapi.com/v2/hotels/search?sort_order=RECOMMENDED&locale=en_US&checkin_date=2023-09-26&adults_number=1&domain=US&region_id=' + cityID + '&checkout_date=2023-09-27', {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004',
+            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004 ',
             'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
     })
@@ -210,7 +210,7 @@ function getHotels(cityID) {
             return response.json();
         })
         .then(function (data) {
-            // document.querySelector("#hotels").innerHTML = "";
+            document.querySelector("#hotels").innerHTML = "";
             var displayLength = 3
 
             for (i = 0; i < displayLength; i++) {
@@ -249,7 +249,7 @@ function getCityID(searchTerm) {
 // Restaurants (Yelp)
 
 function getRestaurants(searchTerm) {
-    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&term=restaurants&sort_by=rating&limit=5', {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=' + searchTerm + '&term=restaurants&sort_by=review_count&limit=5', {
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -260,19 +260,21 @@ function getRestaurants(searchTerm) {
             return response.json();
         })
         .then(function (data) {
+
             document.querySelector("#yelp").innerHTML = "";
-            var displayLength = 5
+            var displayLength = 5;
 
             for (i = 0; i < displayLength; i++) {
+
                 var yelpName = document.createElement("p");
                 var yelpRating = document.createElement("p");
                 var yelpPhone = document.createElement("p");
-                var yelpPhoto = document.createElement("img")
+                var yelpPhoto = document.createElement("img");
+                var icon = document.createElement("i");
                 var name = data.businesses[i].name;
                 var rating = data.businesses[i].rating;
                 var phone = data.businesses[i].display_phone;
                 var photos = data.businesses[i].image_url;
-                var icon = document.createElement("i");
 
                 icon.setAttribute("class", "fa-solid fa-star fa-sm");
                 icon.style = "color:#f0e800";
@@ -284,9 +286,89 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(icon);
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
-                document.querySelector("#hotels").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+                $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
+                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal' + [i] + '">Click for Reviews</button>')
+
+                // Order of arrays not same as order of businesses displayed on screen. Why?
+                // setTimeout(getYelpReviews(data.businesses[i].id), 5000);
+
+                getYelpReviews(data.businesses[i].id, i)
+            };
+
+            var prefix = "yelpName";
+            var modalName;
+            for (j = 0; j < 5; j++) {
+                modalName = document.getElementById(prefix + j);
+                modalName.textContent = data.businesses[j].name;
             };
         });
+};
+
+// Displays reviews in modals
+
+var reviewsArray = [];
+
+function getYelpReviews(restaurantID, index) {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/' + restaurantID + '/reviews?limit=3&sort_by=yelp_sort', {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer 8GkrzCSBb-7hLtDuXuJFVo0NAkoGFSiYYiTLv-lf5MjJOIq0e0KuCx1_MZeT7FXWNZwGof-Y1mjZEjBm79e9v9M4ErO3jeS6sw-9UK6ZYWVbFYNMVdHuK06aY8QNZXYx'
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            var length = 3
+
+            for (j = 0; j < length; j++) {
+                var review = data.reviews[j].text;
+                var name = data.reviews[j].user.name;
+                var date = data.reviews[j].time_created;
+
+                var reviewObject = {
+                    restaurantID: index,
+                    reviewText: review,
+                    reviewName: name,
+                    reviewDate: date
+                };
+
+                reviewsArray.push(reviewObject);
+                console.log(reviewsArray);
+            };
+
+            displayReviews();
+        })
+};
+
+function displayReviews() {
+
+    var prefix = "yelpReview";
+    var modalReviews;
+
+    for (j = 0; j < 5; j++) {
+        var clearReviews = document.getElementById(prefix + j);
+        clearReviews.innerHTML = "";
+    };
+
+    for (i = 0; i < reviewsArray.length; i++) {
+        var reviewID = reviewsArray[i].restaurantID;
+        modalReviews = document.getElementById(prefix + reviewID);
+
+        var reviewTextEl = document.createElement("p");
+        var reviewerNameEl = document.createElement("p");
+        var reviewDateEl = document.createElement("p");
+        var space = document.createElement("hr");
+
+        reviewTextEl.textContent = reviewsArray[i].reviewText;
+        reviewerNameEl.textContent = "Reviewer Name: " + reviewsArray[i].reviewName;
+        reviewDateEl.textContent = "Review Date: " + reviewsArray[i].reviewDate;
+
+        modalReviews.append(reviewTextEl);
+        modalReviews.append(reviewerNameEl);
+        modalReviews.append(reviewDateEl, space);
+    };
 };
 
 // Map
