@@ -5,11 +5,9 @@
 @tailwind utilities;
 
 .card {
-
-
-  justify-content: center;
+   justify-content: center;
    margin: 0;
-   background: #000000d0;;
+   background: rgb(0, 0, 0, 0.85);
    color: white;
    padding: 2em;
    border-radius: 30px;
@@ -18,11 +16,13 @@
    margin: 1em;
    font-family: 'Open Sans', sans-serif;
    font-size: 120%;
+  font: bolder;
 }   
 .search{
    display: flex;
    align-items: center;
    justify-content: center; 
+   color: white;
 }
 
 button{
@@ -32,7 +32,7 @@ button{
     height: 44px;
     width: 44px;
     outline: none;
-    background: #7c7c7c2b;
+    background-color: #7c7c7c2b;
     color: white;
     cursor: pointer;
     
@@ -42,8 +42,8 @@ button{
     outline: none;
     padding: .3em 1em;
     border-radius: 24px;
-    background-color: #7c7c7c2b;
-    color: white;
+    background-color: rgb(255, 255, 255, .8);
+    color: black;
     font-family: 'Open Sans', sans-serif;
     font-size: 100%;
     width: calc(100% - 100px);
@@ -80,4 +80,28 @@ img {
     align-items: center;
 }
 
-.weather.loading
+.icon{
+    width: 100px;
+    height: 100px;
+}
+.scope{
+    background: none;
+}
+
+#Searchlist {
+    border-radius: 5px;
+    background: rgb(99, 99, 99);
+    color: black;
+    font-size: 22px;
+    text-align: center;
+    
+}
+
+.recentStyle{
+    background:  rgb(255, 255, 255, .8);
+    color: black;
+    text-transform: capitalize;
+    border-radius: 10px;
+    font-size: 17px;
+    text-align: center;
+}

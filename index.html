@@ -32,8 +32,11 @@
       <nav class="container text-center bg-gray-800 text-white min-w-full p-6 flex justify-between items-center">  
         <h1 class="text-2xl font-bold ">Travel Guide</h1>
         <form id="search-bar">
-          <input type="text" class="p-1 text-black mr-5" name="searchTerm" placeholder="Search by City"/>
-          <input type="submit" class="bg-gray-600 text-white rounded-full px-4 py-1 hover:cursor-pointer" id="search-submit" value="Search"/>
+          <input type="text" id="searchInput" class="p-1 text-black mr-5" name="searchTerm" placeholder="Search by City"/>
+          <input type="submit" onclick="saveSearch()" class="bg-gray-600 text-white rounded-full px-4 py-1 hover:cursor-pointer" id="search-submit" value="Search"/>
+          
+          <h2 id="Searchlist">RecentSearch</h2>
+         <ul class="recentStyle" id="recentSearches"></ul>
         </form>
       </nav>
   
@@ -42,15 +45,14 @@
       </section>
     </header>
   
-    <h2>Recent Searches</h2>
-    <ul id="recentSearchesList"></ul>
+ 
     <!--Recent searches -->
     <div></div>
     <!--About City-->
     <div class="card">
       <div class="search">
         <input type="text" class="search-hold" placeholder="search" />
-        <button>
+        <button class="scope">
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -66,14 +68,14 @@
           </svg>
         </button>
       </div>
-      <div class="weather loading">
+      <div class="weather">
         <h2 class="city">weather in california</h2>
-        <h1 class="temp">51° C</h1>
+        <h1 class="temp">51 °C</h1>
         <div class="flex">
         <img src="" alt="" class="icon" />
         <div class="description">cloudy</div>
         </div>
-        <div class="humidty">humidity 60%</div>
+        <div class="humidity">humidity 60%</div>
         <div class="wind">wind speed : 56 km/h</div>
       </div>
     </div>
@@ -104,11 +106,7 @@
 
 <!--suggested cities section-->
 <div></div>
-<!--Recent searches -->
-<div></div>
 <!--About City-->
-<div></div>
-<!--Weather-->
 <div></div>
 <!--Hotels, flights-->
 <div id="hotels"></div>

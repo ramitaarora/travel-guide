@@ -15,7 +15,7 @@ var cityCardHeader = document.querySelector('#city-card')
 
 // Navigation/Search Bar
 var searchBar = document.querySelector('#search-bar');
-var searchButton = document.querySelector('#search-submit');
+var searchButton = document.querySelector('#searchInput');
 
 searchBar.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -64,6 +64,7 @@ let weather = {
         document.querySelector(".temp").innerText = temp + "°C";
         document.querySelector(".humidity").innerText = "humidity: " + humidity + "%";
         document.querySelector(".wind").innerText = "wind speed: " + speed + " km/h"
+       
         
     },
    search: function() {
@@ -81,6 +82,46 @@ document.querySelector(".search-hold").addEventListener("keyup", function (event
 });
 
 weather.fetchWeather("California");
+
+
+
+//save search city
+const maxSearches = 5; // Set the maximum number of searches
+
+function saveSearch() {
+  var searchInput = document.getElementById('searchInput').value;
+  if (searchInput) {
+    var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+    
+    // Add the new search
+    recentSearches.push(searchInput);
+
+    // Trim the searches if the limit is exceeded
+    if (recentSearches.length > maxSearches) {
+      recentSearches = recentSearches.slice(recentSearches.length - maxSearches);
+    }
+
+    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+    displayRecentSearches();
+  }
+}
+
+function displayRecentSearches() {
+  var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+  var recentSearchesList = document.getElementById('recentSearches');
+  recentSearchesList.innerHTML = '';
+
+  recentSearches.forEach(function(search) {
+    var listItem = document.createElement('li');
+    listItem.textContent = search;
+    recentSearchesList.appendChild(listItem);
+  });
+}
+
+window.onload = displayRecentSearches;
+
+
+  
 
 
 //fetch request to grab photos, name ,country and population for searched city
