@@ -23,6 +23,9 @@ var dispLifeAgeEl1 = document.querySelector(".display-age-label")
 var dispLifeAgeEl2 =document.querySelector(".display-age-value")
 var dispAirEl1 = document.querySelector(".display-air-label")
 var dispAirEl2 = document.querySelector(".display-air-value")
+var dispPopulationEl1 = document.querySelector('.display-population-label')
+var dispPopulationEl2 = document.querySelector('.display-population-value')
+
 
 // Navigation/Search Bar
 
@@ -51,17 +54,16 @@ searchBar.addEventListener('submit', function (event) {
     // Searching for restaurants via yelp
     getRestaurants(event.target.searchTerm.value);
 
+    // Call weather
+
+    weather.fetchWeather(searchCity);
+
     // Setting header
     if (searchCity) {
         cityHeader.setAttribute("class", "hidden");
         getCityURL(searchCity);
 }
 })
-
-
-
-
-
 
 // weather api key
 let weather = {
@@ -81,29 +83,25 @@ let weather = {
         document.querySelector(".city").innerHTML ="Weather in " + name;
         document.querySelector(".icon").src = "http://openweathermap.org/img/wn/" + icon + ".png"
         document.querySelector(".description").innerText = description;
-        document.querySelector(".temp").innerText = temp + "°C";
-        document.querySelector(".humidity").innerText = "humidity: " + humidity + "%";
-        document.querySelector(".wind").innerText = "wind speed: " + speed + " km/h"
+        document.querySelector(".temp").innerText = Math.trunc((temp - 273.15) * (9/5) + 32) + "°F";
+        document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
+        document.querySelector(".wind").innerText = "Wind speed: " + speed + " km/h"
        
         
     },
    search: function() {
-   this.fetchWeather(document.querySelector(".search-hold").value);
+   this.fetchWeather(document.querySelector("#search-input").value);
    }
 };
-document.querySelector(".search button").addEventListener("click", function () {
+document.querySelector("#search-submit").addEventListener("click", function () {
 weather.search();
 });
 
-document.querySelector(".search-hold").addEventListener("keyup", function (event) {
+document.querySelector("#search-input").addEventListener("keyup", function (event) {
     if (event.key == "Enter") {
         weather.search();
     }
 });
-
-weather.fetchWeather("California");
-
-
 
 //save search city
 const maxSearches = 5; // Set the maximum number of searches
@@ -150,9 +148,9 @@ function showName(cityUrl,searchCity) {
     fetch(cityUrl).then(function(response) {
         return response.json();
     }).then(function(data){
-        console.log(data._links['city:urban_area'].href)
+        //console.log(data._links['city:urban_area'].href)
      var cityDetails = data._links['city:urban_area'].href
-        console.log(data._links['city:country'].name)
+        //console.log(data._links['city:country'].name)
       dispName.textContent = data.name
     dispCountry.textContent = data._links['city:country'].name
     dispPopulation.textContent = ('POPULATION: '+ data.population)  
@@ -165,7 +163,7 @@ function getDetails(cityDetails){
 fetch(cityDetails).then(function(response) {
     return response.json();
 }).then(function(data){
-    console.log(data)
+    //console.log(data)
 })
 }
 
@@ -177,7 +175,7 @@ function getCityUrlShawn(searchCity) {
     fetch(url).then(function(response) {
         return response.json();
     }).then(function(data){ 
-        console.log(data)
+        //console.log(data)
         var cities = data._embedded["city:search-results"];
 
         for (let index = 0; index < cities.length; index++) {
@@ -185,7 +183,7 @@ function getCityUrlShawn(searchCity) {
             cityUrl.push(element._links["city:item"].href);
         }
         cityUrl = cityUrl[0];
-        console.log(cityUrl)
+        //console.log(cityUrl)
        urlofCity(cityUrl,searchCity)
        showName(cityUrl, searchCity)
     })
@@ -222,7 +220,7 @@ function urlofCity(cityUrl, searchCity) {
          }).then(function (data) {
              cityPath = data._links["city:urban_area"].href;
     
-             console.log(cityPath);
+             //console.log(cityPath);
              getImageAbout(cityPath, searchCity)
        })
     }
@@ -234,7 +232,7 @@ function getImageAbout(cityPath,searchCity) {
     
     }).then(function(data) {
         imageUrlAbout = data._links["ua:images"].href;
-        console.log(imageUrlAbout);
+        //console.log(imageUrlAbout);
         getImageShawn(imageUrlAbout, searchCity);
     })
 }
@@ -246,7 +244,7 @@ function getImageAbout(cityPath,searchCity) {
     }).then(function(data) {
     
         var imgCity = data.photos[0].image.web
-        console.log(imgCity)
+        //console.log(imgCity)
         setImg(imgCity,searchCity)
     })
  }
@@ -317,7 +315,7 @@ function getHotels(cityID) {
     fetch('https://hotels-com-provider.p.rapidapi.com/v2/hotels/search?sort_order=RECOMMENDED&locale=en_US&checkin_date=2023-09-26&adults_number=1&domain=US&region_id=' + cityID + '&checkout_date=2023-09-27', {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004 ',
+            'X-RapidAPI-Key': '8664a68d4dmshf551c85b3ef5a62p17821djsned6187553004',
             'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
         }
     })
@@ -379,6 +377,7 @@ function getRestaurants(searchTerm) {
 
             document.querySelector("#yelp").innerHTML = "";
             var displayLength = 5;
+            reviewsArray = [];
 
             for (i = 0; i < displayLength; i++) {
 
@@ -451,7 +450,7 @@ function getYelpReviews(restaurantID, index) {
                 };
 
                 reviewsArray.push(reviewObject);
-                console.log(reviewsArray);
+                //console.log(reviewsArray);
             };
 
             displayReviews();
@@ -507,15 +506,15 @@ function getMap(lat, long, city) {
 function getWikiPageId(searchCity) {
     fetch("https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&exintro=&titles=" + searchCity )
     .then(function(resp) {
-                console.log(resp);
+                //console.log(resp);
                 return resp.json()
             }).then(function(data) {
                 dataNum = Object.keys(data.query.pages)[0]
-                console.log(data)
+                //console.log(data)
             
 
               var wikiId = (data.query.pages[dataNum].extract)
-              console.log(wikiId)     
+              //console.log(wikiId)     
               var divEl = document.querySelector("#article");
               divEl.innerHTML = `${wikiId}`
        
@@ -529,25 +528,16 @@ function getWikiPageImg(searchCity) {
   
     fetch("https://api.unsplash.com/search/photos?query="+ searchCity + "&client_id=M-iPfuxYSOOq-37o5ECD78Xx7qfNrKZeq-cGC7x8K2Q&per_page=10" )
     .then(function(resp) {
-                console.log(resp);
+                //console.log(resp);
                 return resp.json()
             }).then(function(data) {
                 
-                console.log(data.results[0].urls.full)
+                //console.log(data.results[0].urls.full)
             var imgCity = data.results[0].urls.full
                 cityCardHeader.src = imgCity
   })
              
   }
-
-          
-
-       
-
-        
-               
-      
-
 
 //carousel
         $('#myCarousel').carousel({
@@ -574,12 +564,13 @@ function getWikiPageImg(searchCity) {
           
         
           function getDetails(searchCity) {
-            fetch("https://api.teleport.org/api/urban_areas/slug:" + searchCity + "/")
+            var lowerCity = searchCity.toLowerCase()
+            fetch("https://api.teleport.org/api/urban_areas/slug:" + lowerCity + "/")
               .then(function (response) {
                 return response.json();
               })
               .then(function (data) {
-                console.log(data._links["ua:details"].href);
+                //console.log(data._links["ua:details"].href);
                 var detailsOfCity = data._links["ua:details"].href;
           
                 getAllInfo(detailsOfCity);
@@ -594,7 +585,8 @@ function getWikiPageImg(searchCity) {
                 return response.json();
               })
               .then(function (data) {
-                console.log(data);
+                
+                //console.log(data);
           
                 dispClimateEl1.textContent = data.categories[2].data[1].label;
 
@@ -611,6 +603,9 @@ function getWikiPageImg(searchCity) {
                 dispHistoryEl1.textContent = data.categories[4].data[9].label;
           
                 dispHistoryEl2.textContent = data.categories[4].data[9].int_value;
+
+                dispPopulationEl1.textContent = data.categories[1].data[0].label;
+                dispPopulationEl2.textContent = data.categories[1].data[0].float_value;
           
                 dispCurrencyEl1.textContent = data.categories[5].data[0].label;
           
@@ -637,3 +632,7 @@ function getWikiPageImg(searchCity) {
                 dispAirEl2 = data.categories[15].data[2].float_value;
               });
           }
+
+// Set weather initially
+
+weather.fetchWeather("London");

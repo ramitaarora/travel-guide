@@ -6,26 +6,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Travel Guide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
-      rel="stylesheet"
-    />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- <link href="./dist/output.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="./assets/style.css"/>
-
-    <link href="./dist/output.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css" />
-
-    
-   
   </head>
 
 
@@ -33,78 +21,37 @@
   <body>
     <header>
       <!--nav bar-->
-      <nav class="container text-center bg-gray-800 text-white min-w-full p-6 flex justify-between items-center">  
+      <nav class="text-center bg-dark text-white d-flex justify-content-between align-items-center p-3">  
         <h1 class="text-2xl font-bold ">Travel Guide</h1>
-        <form id="search-bar">
-          <input type="text" id="searchInput" class="p-1 text-black mr-5" name="searchTerm" placeholder="Search by City"/>
-          <input type="submit" onclick="saveSearch()" class="bg-gray-600 text-white rounded-full px-4 py-1 hover:cursor-pointer" id="search-submit" value="Search"/>
+        <form id="search-bar" class="d-flex">
+          <input type="text" id="search-input" class="form-control me-2" name="searchTerm" placeholder="Search by City"/>
+          <input type="submit" class="btn btn-outline-light px-4 py-1" onclick="saveSearch()" id="search-submit" value="Search"/>
           
           <h2 id="Searchlist">RecentSearch</h2>
-         <ul class="recentStyle" id="recentSearches"></ul>
+          <ul class="recentStyle" id="recentSearches"></ul>
         </form>
       </nav>
   
       <section id="city-header" class="hidden">
-        <h2 id="city-name" class="text-3xl text-white backdrop-blur-sm w-full p-1">City Name</h2>
+        <h2 id="city-name" class="text-3xl text-white m-0 p-1">City Name</h2>
       </section>
     </header>
-  
  
     <!--Recent searches -->
     <div></div>
     <!--About City-->
     <div class="card">
-      <div class="search">
-        <input type="text" class="search-hold" placeholder="search" />
-        <button class="scope">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 1024 1024"
-            height="1.5em"
-            width="1.5em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
-            ></path>
-          </svg>
-        </button>
-      </div>
       <div class="weather">
-        <h2 class="city">weather in california</h2>
-        <h1 class="temp">51 °C</h1>
+        <h2 class="city"></h2>
+        <h1 class="temp"></h1>
         <div class="flex">
         <img src="" alt="" class="icon" />
-        <div class="description">cloudy</div>
+        <div class="description"></div>
         </div>
-        <div class="humidity">humidity 60%</div>
-        <div class="wind">wind speed : 56 km/h</div>
+        <div class="humidity"></div>
+        <div class="wind"></div>
       </div>
     </div>
-
-
-
-<body>
-  <header>
-    <!--nav bar-->
-    <nav class="text-center bg-dark text-white d-flex justify-content-between align-items-center p-3">  
-      <h1 class="text-2xl font-bold ">Travel Guide</h1>
-      <form id="search-bar" class="d-flex">
-        <input type="text" class="form-control me-2" name="searchTerm" placeholder="Search by City"/>
-        <input type="submit" class="btn btn-outline-light px-4 py-1" id="search-submit" value="Search"/>
-      </form>
-    </nav>
-    <!--city header-->
-    <section id="city-header" class="hidden">
-      <h2 id="city-name" class="text-3xl text-white m-0 p-1">City Name</h2>
-    </section>
-  </header>
-     
-
-
-
 
  
       
@@ -190,42 +137,37 @@
     
 </div>
   <!--About City-->
- 
+<div id="about-city" class="">
   <img id="city-card" src=""></img>
    <h2 id="city-name"></h2>
   <ul>
-    <li>Population</li>
-  <li class="display-input-population"></li>
-  <li class="display-climate-label"></li>
-  <li class="display-climate-value"></li>
-  <li class="display-art-label"></li>
-  <li class="display-art-value"></li>
-  <li class="display-museum-label"></li>
-  <li class="display-museum-value"></li>
-  <li class="display-history-label"></li>
-  <li class="display-history-value"></li>
-  <li class="display-currency-label"></li>
-  <li class="display-currency-value"></li>
-  <li class="display-rate-label"></li>
-  <li class="display-rate-value"></li>
-  <li class="display-language-label"></li>
-  <li class="display-language-value"></li>  
-  <li class="display-life-label"></li>
-  <li class="display-life-value"></li>
-  <li class="display-age-label"></li>
-  <li class="display-age-value"></li>
-  <li class="display-air-label"></li>
-  <li class="display-air-value"></li>      
-  
-
-</ul>
+    <li class="display-input-population"></li>
+    <li class="display-climate-label"></li>
+    <li class="display-climate-value"></li>
+    <li class="display-art-label"></li>
+    <li class="display-art-value"></li>
+    <li class="display-museum-label"></li>
+    <li class="display-museum-value"></li>
+    <li class="display-history-label"></li>
+    <li class="display-history-value"></li>
+    <li class="display-currency-label"></li>
+    <li class="display-currency-value"></li>
+    <li class="display-rate-label"></li>
+    <li class="display-rate-value"></li>
+    <li class="display-language-label"></li>
+    <li class="display-language-value"></li>  
+    <li class="display-life-label"></li>
+    <li class="display-life-value"></li>
+    <li class="display-age-label"></li>
+    <li class="display-age-value"></li>
+    <li class="display-air-label"></li>
+    <li class="display-air-value"></li>      
+    <li class="display-population-label"></li>
+    <li class="display-population-input"></li>
+  </ul>
+</div>
   <div id="article"></div>
 
-
-<!--suggested cities section-->
-<div></div>
-<!--About City-->
-<div></div>
 <!--Hotels, flights-->
 <div id="hotels"></div>
 <!--Yelp-->
@@ -325,7 +267,7 @@
 
 
 
-  <footer>Team GlobeTrotters!!</footer>
+  <footer class="bg-dark p-3 text-white text-center">Team GlobeTrotters!!</footer>
 
 <script src="https://kit.fontawesome.com/589d810311.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

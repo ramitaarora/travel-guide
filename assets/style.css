@@ -1,6 +1,6 @@
-* {
+/* * {
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}
+} */
 
 .card {
    justify-content: center;
@@ -160,4 +160,8 @@ font-family: 'Bodoni MT';
 h2 {
   font-family: 'Bodoni MT';
   
+}
+
+li {
+  list-style: none;
 }
