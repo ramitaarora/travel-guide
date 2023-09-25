@@ -2,6 +2,66 @@
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
+.card {
+   justify-content: center;
+   margin: 0;
+   background: rgb(0, 0, 0, 0.85);
+   color: white;
+   padding: 2em;
+   border-radius: 30px;
+   width: 100%;
+   max-width: 420px;
+   margin: 1em;
+   font-family: 'Open Sans', sans-serif;
+   font-size: 120%;
+  font: bolder;
+}   
+.search{
+   display: flex;
+   align-items: center;
+   justify-content: center; 
+   color: white;
+}
+
+button{
+    margin: .5em;
+    border-radius: 50;
+    border: none;
+    height: 44px;
+    width: 44px;
+    outline: none;
+    background-color: #7c7c7c2b;
+    color: white;
+    cursor: pointer;
+    
+}
+.search-hold{
+    border: none;
+    outline: none;
+    padding: .3em 1em;
+    border-radius: 24px;
+    background-color: rgb(255, 255, 255, .8);
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
+    width: calc(100% - 100px);
+}
+button.hover{
+    background: #7c7c7c6b;
+}
+h1.temp {
+    margin: 0;
+    margin-bottom: 0.4em;
+}
+.description {
+    text-transform: capitalize;
+    margin-left: 8px;
+}
+
+img {
+    height: 300px;
+}
+
 .hidden {
     display: none !important;
 }
@@ -17,6 +77,37 @@
   backdrop-filter: blur(10px);
 }
 
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.icon{
+    width: 100px;
+    height: 100px;
+}
+.scope{
+    background: none;
+}
+
+#Searchlist {
+    border-radius: 5px;
+    background: rgb(99, 99, 99);
+    color: black;
+    font-size: 22px;
+    text-align: center;
+    
+}
+
+.recentStyle{
+    background:  rgb(255, 255, 255, .8);
+    color: black;
+    text-transform: capitalize;
+    border-radius: 10px;
+    font-size: 17px;
+    text-align: center;}
+    
 @media (max-width: 992px) {
   .carousel-inner .carousel-item > div {
       display: none;
