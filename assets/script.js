@@ -396,7 +396,7 @@ function getRestaurants(searchTerm) {
                 yelpRating.append(rating);
                 yelpPhone.append(phone);
                 $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
-                $("#yelp").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal' + [i] + '">Click for Reviews</button>')
+                $("#yelp").append('<button type="button" class="btn btn-primary custom-button" data-toggle="modal" data-target="#exampleModal' + [i] + '">Click for Reviews</button>')
 
                 // Order of arrays not same as order of businesses displayed on screen. Why?
                 // setTimeout(getYelpReviews(data.businesses[i].id), 5000);
