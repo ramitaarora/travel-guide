@@ -170,6 +170,16 @@ li {
 }
 
 .custom-button {
+  background-color: rgb(160, 34, 34);
   display: block;
   width: 150px;
+}
+
+.custom-header {
+  font-weight: bold;
+  font-size: 30px;
+  margin: 30px;
+  padding-top: 8px;
+  border-left: 2px solid rgb(146, 146, 146);
+  border-top: 2px solid rgb(146, 146, 146);
 }
