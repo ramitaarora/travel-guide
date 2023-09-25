@@ -1,8 +1,11 @@
-@config "../tailwind.config.js";
+/* * {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+} */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+.hidden {
+  display: none !important;
+}
 
 .card {
    justify-content: center;
@@ -64,15 +67,16 @@ img {
     height: 300px;
 }
 
-.hidden {
-    display: none !important;
-}
 
 #city-header {
     height: 272px;
     background-position: center;
     display:flex;
     align-items: end;
+}
+
+#city-name {
+  backdrop-filter: blur(10px);
 }
 
 
@@ -104,7 +108,8 @@ img {
     text-transform: capitalize;
     border-radius: 10px;
     font-size: 17px;
-    text-align: center;}
+    text-align: center;
+}
     
 @media (max-width: 992px) {
   .carousel-inner .carousel-item > div {
@@ -158,4 +163,8 @@ font-family: 'Bodoni MT';
 h2 {
   font-family: 'Bodoni MT';
   
+}
+
+li {
+  list-style: none;
 }

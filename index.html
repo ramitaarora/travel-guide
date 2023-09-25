@@ -18,100 +18,62 @@
       rel="stylesheet"
     />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link href="./dist/output.css" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css"/>
-
-    <link href="./dist/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./assets/style.css" />
-
-    
-   
   </head>
 
 
 
   <body>
-    <header>
-      <!--nav bar-->
-      <nav class="container text-center bg-gray-800 text-white min-w-full p-6 flex justify-between items-center">  
-        <h1 class="text-2xl font-bold ">Travel Guide</h1>
-        <form id="search-bar">
-          <input type="text" id="searchInput" class="p-1 text-black mr-5" name="searchTerm" placeholder="Search by City"/>
-          <input type="submit" onclick="saveSearch()" class="bg-gray-600 text-white rounded-full px-4 py-1 hover:cursor-pointer" id="search-submit" value="Search"/>
-          
-          <h2 id="Searchlist">RecentSearch</h2>
-         <ul class="recentStyle" id="recentSearches"></ul>
-        </form>
-      </nav>
-  
-      <section id="city-header" class="hidden">
-        <h2 id="city-name" class="text-3xl text-white backdrop-blur-sm w-full p-1">City Name</h2>
-      </section>
-    </header>
-  
- 
-    <!--Recent searches -->
-    <div></div>
+      <header>
+
+        <nav class="text-center bg-dark text-white d-flex justify-content-between align-items-center p-3">  
+          <h1 class="text-2xl font-bold ">Travel Guide</h1>
+          <form id="search-bar" class="d-flex">
+            <div>
+              <input type="text" id="search-input" class="form-control me-2" name="searchTerm" placeholder="Search by City"/>
+              <ul class="recentStyle" id="recentSearches"></ul>
+            </div>
+            <div>
+              <!-- <h2 id="Searchlist">RecentSearch</h2> -->
+              <input type="submit" class="btn btn-outline-light px-4 py-1" id="search-submit" value="Search"/>
+              
+            </div>
+            <!--Recent searches -->
+              
+          </form>
+        </nav>
+    
+        <section id="city-header" class="hidden">
+          <h2 id="city-name" class="text-3xl text-white m-0 p-1">City Name</h2>
+        </section>
+      </header>
+
     <!--About City-->
     <div class="card">
-      <div class="search">
-        <input type="text" class="search-hold" placeholder="search" />
-        <button class="scope">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 1024 1024"
-            height="1.5em"
-            width="1.5em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
-            ></path>
-          </svg>
-        </button>
-      </div>
       <div class="weather">
-        <h2 class="city">weather in california</h2>
-        <h1 class="temp">51 °C</h1>
+        <h2 class="city"></h2>
+        <h1 class="temp"></h1>
         <div class="flex">
         <img src="" alt="" class="icon" />
-        <div class="description">cloudy</div>
+        <div class="description"></div>
         </div>
-        <div class="humidity">humidity 60%</div>
-        <div class="wind">wind speed : 56 km/h</div>
+        <div class="humidity"></div>
+        <div class="wind"></div>
       </div>
     </div>
-
-
-
-
-
-
 
  
       
   <!--suggested cities -->
-  <div class="container text-center my-3">
-    <h2 class="font-weight-light">THE TROTTERS TOP PLACES TO VISIT!</h2>
-    <div class="row mx-auto my-auto">
-        <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
-                <div class="carousel-item active ">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/sydney image.jpeg">
-                        <div class="carousel-caption d-none d-md-block">
-                           
-                            </div>
-                           <h3>Sydney</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-lg-2">
-                        <img class="img-fluid" src="./assets/images/italy.jpeg">
-                        <div class="carousel-caption d-none d-md-block">
-                            
+    <div class="container text-center my-3" id="top-places">
+      <h2 class="font-weight-light">THE TROTTERS TOP PLACES TO VISIT!</h2>
+      <div class="row mx-auto my-auto">
+          <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+              <div class="carousel-inner w-100" role="listbox">
+                  <div class="carousel-item active ">
+                      <div class="col-lg-2">
+                          <img class="img-fluid" src="./assets/images/sydney image.jpeg">
+                          <div class="carousel-caption d-none d-md-block">
                             </div>
                           <h3>Italy</h3>
                     </div>
@@ -184,42 +146,37 @@
     
 </div>
   <!--About City-->
- 
+<div id="about-city" class="">
   <img id="city-card" src=""></img>
    <h2 id="city-name"></h2>
   <ul>
-    <li>Population</li>
-  <li class="display-input-population"></li>
-  <li class="display-climate-label"></li>
-  <li class="display-climate-value"></li>
-  <li class="display-art-label"></li>
-  <li class="display-art-value"></li>
-  <li class="display-museum-label"></li>
-  <li class="display-museum-value"></li>
-  <li class="display-history-label"></li>
-  <li class="display-history-value"></li>
-  <li class="display-currency-label"></li>
-  <li class="display-currency-value"></li>
-  <li class="display-rate-label"></li>
-  <li class="display-rate-value"></li>
-  <li class="display-language-label"></li>
-  <li class="display-language-value"></li>  
-  <li class="display-life-label"></li>
-  <li class="display-life-value"></li>
-  <li class="display-age-label"></li>
-  <li class="display-age-value"></li>
-  <li class="display-air-label"></li>
-  <li class="display-air-value"></li>      
-  
-
-</ul>
+    <li class="display-input-population"></li>
+    <li class="display-climate-label"></li>
+    <li class="display-climate-value"></li>
+    <li class="display-art-label"></li>
+    <li class="display-art-value"></li>
+    <li class="display-museum-label"></li>
+    <li class="display-museum-value"></li>
+    <li class="display-history-label"></li>
+    <li class="display-history-value"></li>
+    <li class="display-currency-label"></li>
+    <li class="display-currency-value"></li>
+    <li class="display-rate-label"></li>
+    <li class="display-rate-value"></li>
+    <li class="display-language-label"></li>
+    <li class="display-language-value"></li>  
+    <li class="display-life-label"></li>
+    <li class="display-life-value"></li>
+    <li class="display-age-label"></li>
+    <li class="display-age-value"></li>
+    <li class="display-air-label"></li>
+    <li class="display-air-value"></li>      
+    <li class="display-population-label"></li>
+    <li class="display-population-input"></li>
+  </ul>
+</div>
   <div id="article"></div>
 
-
-<!--suggested cities section-->
-<div></div>
-<!--About City-->
-<div></div>
 <!--Hotels, flights-->
 <div id="hotels"></div>
 <!--Yelp-->
@@ -237,106 +194,100 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" id="yelpReview0">
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yelpName1"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="yelpReview1">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yelpName2"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="yelpReview2">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yelpName3"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="yelpReview3">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yelpName4"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="yelpReview4"> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="yelpName1"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="yelpReview1">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
+  <!--map-->
+  <div id="map" class="d-flex justify-content-center align-items-center">
+    <img id="map-image" src="" alt="" class="hidden"/>
   </div>
-  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="yelpName2"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="yelpReview2">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="yelpName3"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="yelpReview3">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="yelpName4"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="yelpReview4"> 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--map-->
-<div id="map">
-  <img id="map-image" src="" alt="" class="hidden"/>
-</div>
 
 
 
-  <footer>Team GlobeTrotters!!</footer>
+  <footer class="bg-dark p-3 text-white text-center">Team GlobeTrotters!!</footer>
 
-<script src="https://kit.fontawesome.com/589d810311.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="./assets/script.js"></script>
+  <script src="https://kit.fontawesome.com/589d810311.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="./assets/script.js"></script>
 </body>
 
 </html>
