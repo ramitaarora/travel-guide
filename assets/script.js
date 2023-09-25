@@ -27,7 +27,7 @@ var dispAirEl2 = document.querySelector(".display-air-value")
 // Navigation/Search Bar
 
 var searchBar = document.querySelector('#search-bar');
-var searchButton = document.querySelector('#search-submit');
+var searchButton = document.querySelector('#searchInput');
 
 searchBar.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -57,6 +57,92 @@ searchBar.addEventListener('submit', function (event) {
         getCityURL(searchCity);
 }
 })
+
+
+
+
+
+
+// weather api key
+let weather = {
+    apikey : "c16441110b26354c450e03b44f77893f",
+    fetchWeather: function (city) {
+        fetch(
+            "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=%20metric&appid=c16441110b26354c450e03b44f77893f",
+        )
+        .then((response) => response.json())
+        .then((data) => this.displayWeather(data));
+    },
+    displayWeather: function(data) {
+        const {name} = data;
+        const { icon, description } = data.weather[0];
+        const {temp, humidity } = data.main;
+        const { speed } = data.wind;
+        document.querySelector(".city").innerHTML ="Weather in " + name;
+        document.querySelector(".icon").src = "http://openweathermap.org/img/wn/" + icon + ".png"
+        document.querySelector(".description").innerText = description;
+        document.querySelector(".temp").innerText = temp + "°C";
+        document.querySelector(".humidity").innerText = "humidity: " + humidity + "%";
+        document.querySelector(".wind").innerText = "wind speed: " + speed + " km/h"
+       
+        
+    },
+   search: function() {
+   this.fetchWeather(document.querySelector(".search-hold").value);
+   }
+};
+document.querySelector(".search button").addEventListener("click", function () {
+weather.search();
+});
+
+document.querySelector(".search-hold").addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+        weather.search();
+    }
+});
+
+weather.fetchWeather("California");
+
+
+
+//save search city
+const maxSearches = 5; // Set the maximum number of searches
+
+function saveSearch() {
+  var searchInput = document.getElementById('searchInput').value;
+  if (searchInput) {
+    var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+    
+    // Add the new search
+    recentSearches.push(searchInput);
+
+    // Trim the searches if the limit is exceeded
+    if (recentSearches.length > maxSearches) {
+      recentSearches = recentSearches.slice(recentSearches.length - maxSearches);
+    }
+
+    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+    displayRecentSearches();
+  }
+}
+
+function displayRecentSearches() {
+  var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+  var recentSearchesList = document.getElementById('recentSearches');
+  recentSearchesList.innerHTML = '';
+
+  recentSearches.forEach(function(search) {
+    var listItem = document.createElement('li');
+    listItem.textContent = search;
+    recentSearchesList.appendChild(listItem);
+  });
+}
+
+window.onload = displayRecentSearches;
+
+
+  
+
 
 //fetch request to grab photos, name ,country and population for searched city
 
