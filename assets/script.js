@@ -25,6 +25,9 @@ var dispAirEl1 = document.querySelector(".display-air-label")
 var dispAirEl2 = document.querySelector(".display-air-value")
 var dispPopulationEl1 = document.querySelector('.display-population-label')
 var dispPopulationEl2 = document.querySelector('.display-population-value')
+
+var cityHeader = document.querySelector('#city-header');
+var cityName = document.querySelector('#city-name');
 var topPlacesEl = document.querySelector('#top-places');
 
 // Navigation/Search Bar
@@ -58,7 +61,7 @@ searchBar.addEventListener('submit', function (event) {
 
     if (searchCity) {
         cityHeader.removeAttribute("class", "hidden");
-        topPlacesEl.setAttribute("class", "hidden")
+        topPlacesEl.setAttribute("class", "hidden");
         getCityURL(searchCity);
 }
 })
@@ -227,8 +230,7 @@ dispName.innerHTML = searchCity;
 
 // City Header
 
-var cityHeader = document.querySelector('#city-header');
-var cityName = document.querySelector('#city-name');
+
 
 function getCityURL(searchCity) {
     var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
