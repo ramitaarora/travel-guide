@@ -25,7 +25,7 @@ var dispAirEl1 = document.querySelector(".display-air-label")
 var dispAirEl2 = document.querySelector(".display-air-value")
 var dispPopulationEl1 = document.querySelector('.display-population-label')
 var dispPopulationEl2 = document.querySelector('.display-population-value')
-
+var topPlacesEl = document.querySelector('#top-places');
 
 // Navigation/Search Bar
 
@@ -45,11 +45,6 @@ searchBar.addEventListener('submit', function (event) {
     getWikiPageId(searchCity)
     getWikiPageImg(searchCity)
     getDetails(searchCity);
-   
-    
-    // Searching for hotels with searchTerm.value below
-    document.querySelector("#hotels").innerHTML = "";
-    getCityID(event.target.searchTerm.value);
 
     // Searching for restaurants via yelp
     getRestaurants(event.target.searchTerm.value);
@@ -57,10 +52,13 @@ searchBar.addEventListener('submit', function (event) {
     // Call weather
 
     weather.fetchWeather(searchCity);
+    saveSearch()
 
     // Setting header
+
     if (searchCity) {
-        cityHeader.setAttribute("class", "hidden");
+        cityHeader.removeAttribute("class", "hidden");
+        topPlacesEl.setAttribute("class", "hidden")
         getCityURL(searchCity);
 }
 })
@@ -104,10 +102,10 @@ document.querySelector("#search-input").addEventListener("keyup", function (even
 });
 
 //save search city
-const maxSearches = 5; // Set the maximum number of searches
+const maxSearches = 3; // Set the maximum number of searches
 
 function saveSearch() {
-  var searchInput = document.getElementById('searchInput').value;
+  var searchInput = document.getElementById('search-input').value;
   if (searchInput) {
     var recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
     
@@ -135,11 +133,6 @@ function displayRecentSearches() {
     recentSearchesList.appendChild(listItem);
   });
 }
-
-window.onload = displayRecentSearches;
-
-
-  
 
 
 //fetch request to grab photos, name ,country and population for searched city
@@ -188,6 +181,50 @@ function getCityUrlShawn(searchCity) {
        showName(cityUrl, searchCity)
     })
 }
+
+function urlofCity(cityUrl, searchCity) {
+    var cityPath;
+    fetch(cityUrl).then(function(response) {
+        return response.json();
+    }).then(function (data) {
+        cityPath = data._links["city:urban_area"].href;
+
+        //console.log(cityPath);
+        getImageAbout(cityPath, searchCity)
+  })
+}
+
+function getImageAbout(cityPath,searchCity) {
+var imageUrlAbout;
+fetch(cityPath).then(function(response) {
+   return response.json();
+
+}).then(function(data) {
+   imageUrlAbout = data._links["ua:images"].href;
+   //console.log(imageUrlAbout);
+   getImageShawn(imageUrlAbout, searchCity);
+})
+}
+
+
+function getImageShawn(imageUrlAbout,searchCity){
+fetch(imageUrlAbout).then(function(response) {
+   return response.json();
+}).then(function(data) {
+
+   var imgCity = data.photos[0].image.web
+   //console.log(imgCity)
+   setImg(imgCity,searchCity)
+})
+}
+
+function setImg (imgCity,searchCity){
+
+
+dispName.innerHTML = searchCity;
+}
+  
+
 // City Header
 
 var cityHeader = document.querySelector('#city-header');
@@ -213,48 +250,7 @@ function getCityURL(searchCity) {
     })
 }
 
-function urlofCity(cityUrl, searchCity) {
-         var cityPath;
-         fetch(cityUrl).then(function(response) {
-             return response.json();
-         }).then(function (data) {
-             cityPath = data._links["city:urban_area"].href;
-    
-             //console.log(cityPath);
-             getImageAbout(cityPath, searchCity)
-       })
-    }
 
-function getImageAbout(cityPath,searchCity) {
-    var imageUrlAbout;
-    fetch(cityPath).then(function(response) {
-        return response.json();
-    
-    }).then(function(data) {
-        imageUrlAbout = data._links["ua:images"].href;
-        //console.log(imageUrlAbout);
-        getImageShawn(imageUrlAbout, searchCity);
-    })
-}
-
-
- function getImageShawn(imageUrlAbout,searchCity){
-    fetch(imageUrlAbout).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-    
-        var imgCity = data.photos[0].image.web
-        //console.log(imgCity)
-        setImg(imgCity,searchCity)
-    })
- }
-
-function setImg (imgCity,searchCity){
-
-    
-    dispName.innerHTML = searchCity;
-}
-       
 
 function getCity(cityurl, searchCity) {
     var cityIdURL;
@@ -462,10 +458,10 @@ function displayReviews() {
     var prefix = "yelpReview";
     var modalReviews;
 
-    for (j = 0; j < 5; j++) {
-        var clearReviews = document.getElementById(prefix + j);
-        clearReviews.innerHTML = "";
-    };
+    // for (j = 0; j < 5; j++) {
+    //     var clearReviews = document.getElementById(prefix + j);
+    //     clearReviews.innerHTML = "";
+    // };
 
     for (i = 0; i < reviewsArray.length; i++) {
         var reviewID = reviewsArray[i].restaurantID;
@@ -636,3 +632,4 @@ function getWikiPageImg(searchCity) {
 // Set weather initially
 
 weather.fetchWeather("London");
+window.onload = displayRecentSearches;

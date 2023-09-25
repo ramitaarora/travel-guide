@@ -2,6 +2,11 @@
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 } */
 
+
+.hidden {
+  display: none !important;
+}
+
 .card {
    justify-content: center;
    margin: 0;
@@ -62,9 +67,6 @@ img {
     height: 300px;
 }
 
-.hidden {
-    display: none !important;
-}
 
 #city-header {
     height: 272px;
@@ -106,7 +108,8 @@ img {
     text-transform: capitalize;
     border-radius: 10px;
     font-size: 17px;
-    text-align: center;}
+    text-align: center;
+}
     
 @media (max-width: 992px) {
   .carousel-inner .carousel-item > div {
