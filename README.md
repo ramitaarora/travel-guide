@@ -19,7 +19,7 @@ This website can be used via GitHub Pages at https://ramitaarora.github.io/trave
 
 ## Usage
 
-<img src="" alt="website-screenshot"/>
+<img src="./assets/images/screenshot.png" alt="website-screenshot"/>
 
 ## Credits
 
