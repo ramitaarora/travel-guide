@@ -458,10 +458,10 @@ function displayReviews() {
     var prefix = "yelpReview";
     var modalReviews;
 
-    // for (j = 0; j < 5; j++) {
-    //     var clearReviews = document.getElementById(prefix + j);
-    //     clearReviews.innerHTML = "";
-    // };
+    for (j = 0; j < 5; j++) {
+        var clearReviews = document.getElementById(prefix + j);
+        clearReviews.innerHTML = "";
+    };
 
     for (i = 0; i < reviewsArray.length; i++) {
         var reviewID = reviewsArray[i].restaurantID;
