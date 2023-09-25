@@ -66,7 +66,8 @@ searchBar.addEventListener('submit', function (event) {
 }
 })
 
-// weather api key
+// weather
+
 let weather = {
     apikey : "c16441110b26354c450e03b44f77893f",
     fetchWeather: function (city) {
@@ -105,6 +106,7 @@ document.querySelector("#search-input").addEventListener("keyup", function (even
 });
 
 //save search city
+
 const maxSearches = 3; // Set the maximum number of searches
 
 function saveSearch() {
@@ -222,15 +224,11 @@ fetch(imageUrlAbout).then(function(response) {
 }
 
 function setImg (imgCity,searchCity){
-
-
-dispName.innerHTML = searchCity;
+    dispName.innerHTML = searchCity;
 }
   
 
 // City Header
-
-
 
 function getCityURL(searchCity) {
     var url = 'https://api.teleport.org/api/cities/?search=' + searchCity;
@@ -251,8 +249,6 @@ function getCityURL(searchCity) {
         getCity(cityURL);
     })
 }
-
-
 
 function getCity(cityurl, searchCity) {
     var cityIdURL;
@@ -374,7 +370,7 @@ function getRestaurants(searchTerm) {
         .then(function (data) {
 
             document.querySelector("#yelp").innerHTML = "";
-            var displayLength = 5;
+            var displayLength = 3;
             reviewsArray = [];
 
             for (i = 0; i < displayLength; i++) {
@@ -410,7 +406,7 @@ function getRestaurants(searchTerm) {
 
             var prefix = "yelpName";
             var modalName;
-            for (j = 0; j < 5; j++) {
+            for (j = 0; j < 3; j++) {
                 modalName = document.getElementById(prefix + j);
                 modalName.textContent = data.businesses[j].name;
             };
@@ -460,7 +456,7 @@ function displayReviews() {
     var prefix = "yelpReview";
     var modalReviews;
 
-    for (j = 0; j < 5; j++) {
+    for (j = 0; j < 3; j++) {
         var clearReviews = document.getElementById(prefix + j);
         clearReviews.innerHTML = "";
     };
@@ -497,9 +493,7 @@ function getMap(lat, long, city) {
     mapImage.removeAttribute("class", "hidden");
 }
 
-
-
-        
+// City Information
 
 function getWikiPageId(searchCity) {
     fetch("https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&exintro=&titles=" + searchCity )
@@ -537,7 +531,9 @@ function getWikiPageImg(searchCity) {
              
   }
 
-//carousel
+
+// Suggested Cities Carousel
+
         $('#myCarousel').carousel({
             interval: 3000
           })
@@ -633,5 +629,5 @@ function getWikiPageImg(searchCity) {
 
 // Set weather initially
 
-weather.fetchWeather("London");
+weather.fetchWeather("Los Angeles");
 window.onload = displayRecentSearches;
