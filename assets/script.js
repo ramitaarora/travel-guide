@@ -319,11 +319,18 @@ function getHotels(cityID) {
         })
         .then(function (data) {
             document.querySelector("#hotels").innerHTML = "";
+
+            var header = document.createElement("p");
+                header.textContent = "Recommended Hotels:";
+                header.classList.add("custom-header");
+                document.querySelector("#hotels").append(header);
+
             var displayLength = 3
 
             for (i = 0; i < displayLength; i++) {
                 var hotelInfo = document.createElement("p");
-                var hotelPhoto = document.createElement("img")
+                var hotelPhoto = document.createElement("img");
+                var space = document.createElement("br");
                 var name = data.properties[i].name;
                 var photos = data.properties[i].propertyImage.image.url;
                 var alt = data.properties[i].propertyImage.image.description;
@@ -331,7 +338,7 @@ function getHotels(cityID) {
                 hotelPhoto.setAttribute('src', photos);
                 hotelPhoto.setAttribute('alt', alt);
                 hotelInfo.append(name);
-                document.querySelector("#hotels").append(hotelInfo, hotelPhoto);
+                document.querySelector("#hotels").append(hotelInfo, hotelPhoto, space);
             };
         });
 };
@@ -370,6 +377,13 @@ function getRestaurants(searchTerm) {
         .then(function (data) {
 
             document.querySelector("#yelp").innerHTML = "";
+
+            var header = document.createElement("p");
+            header.textContent = "Recommended Restaurants:";
+            header.style.textAlign = "center";
+            header.classList.add("custom-header");
+            $("#yelp").append(header);
+
             var displayLength = 3;
             reviewsArray = [];
 
@@ -380,6 +394,7 @@ function getRestaurants(searchTerm) {
                 var yelpPhone = document.createElement("p");
                 var yelpPhoto = document.createElement("img");
                 var icon = document.createElement("i");
+
                 var name = data.businesses[i].name;
                 var rating = data.businesses[i].rating;
                 var phone = data.businesses[i].display_phone;
@@ -397,9 +412,6 @@ function getRestaurants(searchTerm) {
                 yelpPhone.append(phone);
                 $("#yelp").append(yelpPhoto, yelpName, yelpRating, yelpPhone);
                 $("#yelp").append('<button type="button" class="btn btn-primary custom-button" data-toggle="modal" data-target="#exampleModal' + [i] + '">Click for Reviews</button>')
-
-                // Order of arrays not same as order of businesses displayed on screen. Why?
-                // setTimeout(getYelpReviews(data.businesses[i].id), 5000);
 
                 getYelpReviews(data.businesses[i].id, i)
             };
@@ -444,7 +456,6 @@ function getYelpReviews(restaurantID, index) {
                 };
 
                 reviewsArray.push(reviewObject);
-                //console.log(reviewsArray);
             };
 
             displayReviews();
