@@ -507,7 +507,13 @@ function getMap(lat, long, city) {
 // City Information
 
 function getWikiPageId(searchCity) {
-    fetch("https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&exintro=&titles=" + searchCity )
+    var formatWord = searchCity.split(" ")
+    for (let i=0; i < formatWord.length; i++) {
+        formatWord[i] = formatWord[i][0].toUpperCase() + formatWord[i].slice(1);
+    } 
+    formatWord = formatWord.join(' ')
+
+    fetch("https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&exintro=&titles=" + formatWord )
     .then(function(resp) {
                 //console.log(resp);
                 return resp.json()
