@@ -183,3 +183,8 @@ li {
   border-left: 2px solid rgb(146, 146, 146);
   border-top: 2px solid rgb(146, 146, 146);
 }
+
+#map-image {
+  max-width: 100%;
+  max-height: 100%;
+}
